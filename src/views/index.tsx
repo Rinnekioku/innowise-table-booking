@@ -1,8 +1,8 @@
 import React from "react";
-import {Register} from "../components/register";
+import {Auth} from "../components/auth";
 
 export function App(): JSX.Element {
     return (
-        <Register/>
+        <Auth/>
     );
 }
