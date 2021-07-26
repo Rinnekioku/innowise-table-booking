@@ -1862,6 +1862,14 @@
   "resolved" "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
+"@react-firebase/auth@^0.2.10":
+  "integrity" "sha512-qeRv96HI5Y3nPRwO3Zi4QnYYeJstVu8lDih+QQbTeuadUUngchGw5Tp7dseOY5u3q/+e+kF2hV7BUkfYt7FS8g=="
+  "resolved" "https://registry.npmjs.org/@react-firebase/auth/-/auth-0.2.10.tgz"
+  "version" "0.2.10"
+  dependencies:
+    "lodash.get" "^4.4.2"
+    "render-and-add-props" "^0.5.0"
+
 "@react-firebase/database@^0.3.11":
   "integrity" "sha512-pVOILZwFShciopf/7CC/3rRAWcd1CQ5g0JPkhAWSiMP97fiUiaWtVrnBRtoWVY7kQqyF4G9ZyR/Wm43J9a3ZQA=="
   "resolved" "https://registry.npmjs.org/@react-firebase/database/-/database-0.3.11.tgz"
@@ -7915,6 +7923,11 @@
   "integrity" "sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8="
   "resolved" "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
   "version" "4.5.0"
+
+"lodash.get@^4.4.2":
+  "integrity" "sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk="
+  "resolved" "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz"
+  "version" "4.4.2"
 
 "lodash.memoize@^4.1.2":
   "integrity" "sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4="
