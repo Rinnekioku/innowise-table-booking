@@ -1,4 +1,6 @@
 import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/storage";
 
 export const config = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY as string,
@@ -9,4 +11,8 @@ export const config = {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID as string,
 };
 
-export const app = firebase.initializeApp(config);
+firebase.initializeApp(config);
+
+export const auth = firebase.auth();
+
+export const storage = firebase.storage();
