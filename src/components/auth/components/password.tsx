@@ -19,8 +19,7 @@ export function PasswordField(props: FormFieldEntity): JSX.Element {
                     } else {
                         return Promise.reject(new Error());
                     }
-                },
-                }),
+                }}),
             ]}
             hasFeedback={props.hasFeedback}
         >
