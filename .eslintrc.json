@@ -31,34 +31,11 @@
         ],
         "quotes": [
             "error",
-            "double"
+            "single"
         ],
         "semi": [
             "error",
             "always"
-        ]
-    },
-    "settings": {
-        "react": {
-            "createClass": "createReactClass",
-            "pragma": "React",
-            "fragment": "Fragment",
-            "version": "detect"
-        },
-        "propWrapperFunctions": [
-            "forbidExtraProps",
-            {"property": "freeze", "object": "Object"},
-            {"property": "myFavoriteWrapper"}
-        ],
-        "componentWrapperFunctions": [
-            "observer",
-            {"property": "styled"},
-            {"property": "observer", "object": "Mobx"},
-            {"property": "observer", "object": "<pragma>"}
-        ],
-        "linkComponents": [
-            "Hyperlink",
-            {"name": "Link", "linkAttribute": "to"}
         ]
     }
 }
