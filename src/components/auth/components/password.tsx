@@ -13,11 +13,11 @@ export function PasswordField(props: FormFieldEntity): JSX.Element {
                     const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
                     if (value.length > 8 && value.match(passwordRegExp)){
-                        return Promise.resolve(easyPasswordErrorMessage);
+                        return Promise.resolve();
                     } else if(value === '') {
                         return Promise.reject(new Error(emptyPasswordFieldErrorMessage));
                     } else {
-                        return Promise.reject(new Error());
+                        return Promise.reject(new Error(easyPasswordErrorMessage));
                     }
                 }}),
             ]}
