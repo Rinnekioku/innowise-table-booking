@@ -4,7 +4,15 @@ import {FormSC} from './styled';
 import {SignUpConfig, SignInConfig} from './configs';
 import {useSignIn, useSignUp} from '../../hooks/auth';
 
-export function SignUp(): JSX.Element {
+interface SignUpPropsEntity {
+    config: (filiList: any[], setFileList: any) => JSX.Element[],
+}
+
+interface SignInPropsEntity {
+    config: JSX.Element[],
+}
+
+export function SignUp(props: SignUpPropsEntity): JSX.Element {
     const {form, fileList, setFileList, signUp} = useSignUp();
 
     return (
@@ -13,12 +21,12 @@ export function SignUp(): JSX.Element {
             onSubmitCapture={signUp}
             name='sign_up'
         >
-            {SignUpConfig(fileList, setFileList).map(item => item)}
+            {props.config(fileList, setFileList)}
         </FormSC>
     );
 }
 
-export function SignIn(): JSX.Element {
+export function SignIn(props: SignInPropsEntity): JSX.Element {
     const {form, signIn} = useSignIn();
 
     return (
@@ -27,7 +35,7 @@ export function SignIn(): JSX.Element {
             onSubmitCapture={signIn}
             name='sign_up'
         >
-            {SignInConfig.map(item => item)}
+            {props.config}
         </FormSC>
     );
 }

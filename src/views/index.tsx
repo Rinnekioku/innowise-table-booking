@@ -5,6 +5,7 @@ import {FirebaseAuthProvider} from '@react-firebase/auth';
 import {config} from '../services/firebase';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {AuthLinks} from './routes';
+import {SignUpConfig, SignInConfig} from '../components/auth/configs';
 
 export function App(): JSX.Element {
     const [user, setUser] = useState<any>(null);
@@ -21,10 +22,14 @@ export function App(): JSX.Element {
                 <Switch>
                     <Redirect exact from='/' to={AuthLinks.signUp} />
                     <Route exact path={AuthLinks.signUp}>
-                        <SignUp/>
+                        <SignUp
+                            config={SignUpConfig}
+                        />
                     </Route>
                     <Route path={AuthLinks.signIn}>
-                        <SignIn/>
+                        <SignIn
+                            config={SignInConfig}
+                        />
                     </Route>
                 </Switch>
             </FirebaseAuthProvider>
