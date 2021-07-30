@@ -6,10 +6,12 @@ import {config} from '../services/firebase';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {AuthLinks} from './routes';
 import {SignUpConfig, SignInConfig} from '../components/auth/configs';
+import i18nextInit from '../services/i18next';
 
 export function App(): JSX.Element {
     const [user, setUser] = useState<any>(null);
 
+    i18nextInit();
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             setUser(user);
