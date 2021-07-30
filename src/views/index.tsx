@@ -14,7 +14,7 @@ export function App(): JSX.Element {
         firebase.auth().onAuthStateChanged((user) => {
             setUser(user);
         });
-    }, []);
+    }, [user]);
 
     return (
         <Router>
