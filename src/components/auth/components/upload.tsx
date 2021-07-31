@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {Form, Upload, Button, message} from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { UploadOutlined } from '@ant-design/icons';
@@ -11,7 +11,7 @@ interface UploadPropsEntity{
 }
 
 export function UploadProfilePicture(props: UploadPropsEntity): JSX.Element {
-    const fakeLoad = useCallback(({file, onError, onSuccess}) => {
+    const fakeLoad = ({file, onError, onSuccess}: any) => {
         try {
             const successLoadMessage = 'Picture added successfully';
             props.setFileList([file]);
@@ -21,13 +21,14 @@ export function UploadProfilePicture(props: UploadPropsEntity): JSX.Element {
             onError(e);
             message.error(e.message);
         }
-    },[props.fileList]);
+    };
 
-    const onChange = useCallback(({file} : {file: any}) => {
+    const onChange =({file} : {file: any}) => {
         if (file.status === 'removed'){
             props.setFileList([]);
         }
-    }, [props.fileList]);
+    };
+
     return (
         <Form.Item
             name={props.name}

@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react';
 import {Form, message} from 'antd';
-import {auth, storage} from '../../services/firebase';
+import {auth, storage} from '../../firebase';
 
 export function useSignUp(){
     const [form] = Form.useForm();

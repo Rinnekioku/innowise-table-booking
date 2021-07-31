@@ -2520,7 +2520,7 @@
     "eslint-scope" "^5.1.1"
     "eslint-utils" "^3.0.0"
 
-"@typescript-eslint/parser@^4.0.0", "@typescript-eslint/parser@^4.28.5", "@typescript-eslint/parser@^4.4.1", "@typescript-eslint/parser@^4.5.0":
+"@typescript-eslint/parser@^4.0.0", "@typescript-eslint/parser@^4.28.5", "@typescript-eslint/parser@^4.5.0":
   "integrity" "sha512-NPCOGhTnkXGMqTznqgVbA5LqVsnw+i3+XA1UKLnAb+MG1Y1rP4ZSK9GX0kJBmAZTMIktf+dTwXToT6kFwyimbw=="
   "resolved" "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-4.28.5.tgz"
   "version" "4.28.5"
@@ -5283,38 +5283,6 @@
   optionalDependencies:
     "source-map" "~0.6.1"
 
-"eslint-config-airbnb-base@^14.2.0", "eslint-config-airbnb-base@^14.2.1":
-  "integrity" "sha512-GOrQyDtVEc1Xy20U7vsB2yAoB4nBlfH5HZJeatRXHleO+OS5Ot+MWij4Dpltw4/DyIkqUfqz1epfhVR5XWWQPA=="
-  "resolved" "https://registry.npmjs.org/eslint-config-airbnb-base/-/eslint-config-airbnb-base-14.2.1.tgz"
-  "version" "14.2.1"
-  dependencies:
-    "confusing-browser-globals" "^1.0.10"
-    "object.assign" "^4.1.2"
-    "object.entries" "^1.1.2"
-
-"eslint-config-airbnb-typescript@^12.3.1":
-  "integrity" "sha512-ql/Pe6/hppYuRp4m3iPaHJqkBB7dgeEmGPQ6X0UNmrQOfTF+dXw29/ZjU2kQ6RDoLxaxOA+Xqv07Vbef6oVTWw=="
-  "resolved" "https://registry.npmjs.org/eslint-config-airbnb-typescript/-/eslint-config-airbnb-typescript-12.3.1.tgz"
-  "version" "12.3.1"
-  dependencies:
-    "@typescript-eslint/parser" "^4.4.1"
-    "eslint-config-airbnb" "^18.2.0"
-    "eslint-config-airbnb-base" "^14.2.0"
-
-"eslint-config-airbnb@^18.2.0", "eslint-config-airbnb@^18.2.1":
-  "integrity" "sha512-glZNDEZ36VdlZWoxn/bUR1r/sdFKPd1mHPbqUtkctgNG4yT2DLLtJ3D+yCV+jzZCc2V1nBVkmdknOJBZ5Hc0fg=="
-  "resolved" "https://registry.npmjs.org/eslint-config-airbnb/-/eslint-config-airbnb-18.2.1.tgz"
-  "version" "18.2.1"
-  dependencies:
-    "eslint-config-airbnb-base" "^14.2.1"
-    "object.assign" "^4.1.2"
-    "object.entries" "^1.1.2"
-
-"eslint-config-google@^0.14.0":
-  "integrity" "sha512-WsbX4WbjuMvTdeVL6+J3rK1RGhCTqjsFjX7UMSMgZiyxxaNLkoJENbrGExzERFeoTpGw3F3FypTiWAP9ZXzkEw=="
-  "resolved" "https://registry.npmjs.org/eslint-config-google/-/eslint-config-google-0.14.0.tgz"
-  "version" "0.14.0"
-
 "eslint-config-react-app@^6.0.0":
   "integrity" "sha512-bpoAAC+YRfzq0dsTk+6v9aHm/uqnDwayNAXleMypGl6CpxI9oXXscVHo4fk3eJPIn+rsbtNetB4r/ZIidFIE8A=="
   "resolved" "https://registry.npmjs.org/eslint-config-react-app/-/eslint-config-react-app-6.0.0.tgz"
@@ -5391,7 +5359,7 @@
     "jsx-ast-utils" "^3.1.0"
     "language-tags" "^1.0.5"
 
-"eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0", "eslint-plugin-react-hooks@^4.0.8", "eslint-plugin-react-hooks@^4.2.0":
+"eslint-plugin-react-hooks@^4.0.8", "eslint-plugin-react-hooks@^4.2.0":
   "integrity" "sha512-623WEiZJqxR7VdxFCKLI6d6LLpwJkGPYKODnkH3D7WpOG5KM8yWueBd8TLsNAetEJNF5iJmolaAKO3F8yzyVBQ=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.2.0.tgz"
   "version" "4.2.0"
@@ -5472,7 +5440,7 @@
     "micromatch" "^4.0.2"
     "schema-utils" "^3.0.0"
 
-"eslint@*", "eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0", "eslint@^3 || ^4 || ^5 || ^6 || ^7", "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^5 || ^6 || ^7", "eslint@^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^5.16.0 || ^6.8.0 || ^7.2.0", "eslint@^7.0.0", "eslint@^7.1.0", "eslint@^7.11.0", "eslint@^7.31.0", "eslint@^7.5.0", "eslint@>= 4.12.1", "eslint@>=5", "eslint@>=5.16.0":
+"eslint@*", "eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0", "eslint@^3 || ^4 || ^5 || ^6 || ^7", "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^5 || ^6 || ^7", "eslint@^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^7.0.0", "eslint@^7.1.0", "eslint@^7.11.0", "eslint@^7.31.0", "eslint@^7.5.0", "eslint@>= 4.12.1", "eslint@>=5":
   "integrity" "sha512-vafgJpSh2ia8tnTkNUkwxGmnumgckLh5aAbLa1xRmIn9+owi8qBNGKL+B881kNKNTy7FFqTEkpNkUvmw0n6PkA=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-7.31.0.tgz"
   "version" "7.31.0"
@@ -8739,7 +8707,7 @@
     "has-symbols" "^1.0.1"
     "object-keys" "^1.1.1"
 
-"object.entries@^1.1.0", "object.entries@^1.1.2", "object.entries@^1.1.4":
+"object.entries@^1.1.0", "object.entries@^1.1.4":
   "integrity" "sha512-h4LWKWE+wKQGhtMjZEBud7uLGhqyLwj8fpHOarZhD2uY3C9cRtk57VQ89ke3moByLXMedqs3XCHzyb4AmA2DjA=="
   "resolved" "https://registry.npmjs.org/object.entries/-/object.entries-1.1.4.tgz"
   "version" "1.1.4"

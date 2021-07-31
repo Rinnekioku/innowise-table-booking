@@ -1,5 +1,5 @@
 import React from 'react';
-import {EmailField, PasswordField, PasswordConfirmField, UploadProfilePicture, SubmitButton, AuthRedirict} from './components';
+import {EmailField, PasswordField, PasswordConfirmField, UploadProfilePicture, SubmitButton, AuthRedirict} from '../../../components/auth/components';
 
 export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] => [
     (
@@ -11,7 +11,7 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
                 () => ({validator(_: string, value: string) {
                     const emailRegExp = /.*@innowise-group.com$/;
                     const emptyEmailFieldErrorMessage = 'Email field is required';
-                    const invalidEmailErrorMessage = 'Please use valid email';
+                    const invalidEmailErrorMessage = 'Please use email that ends with @innowise-group.com';
 
                     if (value.match(emailRegExp) !== null){
                         console.log(value);
@@ -97,40 +97,6 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
             text='Already have account?&nbsp;'
             linkText='Sign in'
             path='/sign_in'
-        />
-    ),
-];
-
-export const SignInConfig: JSX.Element[] = [
-    (
-        <EmailField
-            key={1}
-            name="email"
-            placeholder="Enter your email(@innowise-group.com)"
-            hasFeedback={false}
-        />
-    ),
-    (
-        <PasswordField
-            key={2}
-            name="password"
-            hasFeedback={true}
-            placeholder="Enter password"
-        />
-    ),
-    (
-        <SubmitButton
-            key={3}
-            name="sign_in"
-            buttonText="Sign in"
-        />
-    ),
-    (
-        <AuthRedirict
-            key={4}
-            text='Don not have account yet?&nbsp;'
-            linkText='Sign up'
-            path='/sign_up'
         />
     ),
 ];
