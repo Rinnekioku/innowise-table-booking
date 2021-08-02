@@ -4,7 +4,6 @@ import { useSignUp } from '../../../core/hooks/auth';
 import { UploadFile } from 'antd/lib/upload/interface';
 
 interface SignUpPropsEntity {
-    //eslint @typescript-eslint/no-explicit-any
     config: (filiList: UploadFile[], setFileList: any) => JSX.Element[],
 }
 

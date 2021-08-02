@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {SignUp, SignIn} from '../auth';
 import firebase from 'firebase/app';
-import {FirebaseAuthProvider, FirebaseAuthConsumer} from '@react-firebase/auth';
+import {FirebaseAuthProvider} from '@react-firebase/auth';
 import {config} from '../../core/firebase';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {AuthLinks, ContentLinks} from '../../core/routes';
@@ -13,7 +13,7 @@ import {ContentsSC} from '../../core/styles/styled';
 import '../../core/styles/style.less';
 import {NotFound} from './components/notFound';
 import {db} from '../../core/firebase';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from '../../core/redux/index';
 
 export function App(): JSX.Element {
@@ -29,23 +29,12 @@ export function App(): JSX.Element {
         }
     ];
 
-    const [offices, setOffices] = useState<any[]>([]);
-
     i18nextInit();
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             setUser(user);
         });
     }, [user]);
-
-    useEffect(() => {
-        const officesRef = db.ref('offices/');
-        officesRef.on('value', (snapshot) => {
-            const data = snapshot.val();
-            console.log('Offices', data);
-            setOffices(data);
-        });
-    }, []);
 
     return (
         <Router>
@@ -67,7 +56,6 @@ export function App(): JSX.Element {
                             </Route>
                             <Route path={ContentLinks.offices}>
                                 <Offices
-                                    offices={Object.values(offices)}
                                     routes={routes}
                                 />
                             

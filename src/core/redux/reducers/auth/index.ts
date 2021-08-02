@@ -10,9 +10,9 @@ interface AuthActionEntity {
 }
 
 const initialState: AuthStateEntity = {
-    email: 'jfdslkfjsdklfsd',
-    password: 'fdskjfksdlfklds',
-    passwordConfirm: 'fdsjkflsjfklsd',
+    email: '',
+    password: '',
+    passwordConfirm: '',
 };
 
 export function authReducer(state: AuthStateEntity = initialState, action: AuthActionEntity): AuthStateEntity {

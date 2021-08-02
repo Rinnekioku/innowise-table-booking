@@ -1,14 +1,16 @@
 import React from 'react';
-import {Space, Card, Button, PageHeader} from 'antd';
+import {Space, PageHeader} from 'antd';
 import {OfficeEntity, Office} from './components/office';
 import {Route} from 'antd/lib/breadcrumb/Breadcrumb';
+import { useSelector } from 'react-redux';
 
 interface OfficesEntity{
-    offices: OfficeEntity[],
     routes: Route[],
 }
 
 export function Offices(props: OfficesEntity){
+    const offices = useSelector((state: any) => state.offices);
+    
     return (
         <>
             <PageHeader
@@ -16,7 +18,7 @@ export function Offices(props: OfficesEntity){
                 breadcrumb={{routes: props.routes}}
             />
             <Space>
-                {props.offices.map((office: OfficeEntity) => {
+                {offices.map((office: OfficeEntity) => {
                     return (
                         <Office
                             key={office.id}

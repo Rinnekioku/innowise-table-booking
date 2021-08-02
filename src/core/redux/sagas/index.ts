@@ -5,5 +5,3 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 export const sagaMiddleware = createSagaMiddleware();
 
 export const composedEnhancer = composeWithDevTools(applyMiddleware(sagaMiddleware));
-
-
