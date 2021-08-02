@@ -1,39 +1,30 @@
 import React from 'react';
 import {Space, Card, Button, PageHeader} from 'antd';
+import {OfficeEntity, Office} from './components/office';
+import {Route} from 'antd/lib/breadcrumb/Breadcrumb';
 
-export function Offices(){
-    const routes= [
-        {
-            path: '/',
-            breadcrumbName: 'Home'
-        },
-        {
-            path: '/offices',
-            breadcrumbName: 'Offices'
-        }
-    ];
+interface OfficesEntity{
+    offices: OfficeEntity[],
+    routes: Route[],
+}
 
+export function Offices(props: OfficesEntity){
     return (
         <>
             <PageHeader
                 title='Offices'
-                breadcrumb={{routes}}
+                breadcrumb={{routes: props.routes}}
             />
             <Space>
-                <Card>
-                First office<br/>
-                    <Button>Go to</Button>
-                </Card>
-
-                <Card>
-                Second office<br/>
-                    <Button>Go to</Button>
-                </Card>
-
-                <Card>
-                    Third office<br/>
-                    <Button>Go to</Button>
-                </Card>
+                {props.offices.map((office: OfficeEntity) => {
+                    return (
+                        <Office
+                            key={office.id}
+                            id={office.id}
+                            name={office.name}
+                        />
+                    );
+                })}
             </Space>
         </>
     );

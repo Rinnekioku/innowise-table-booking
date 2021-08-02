@@ -1,5 +1,6 @@
 import React from 'react';
 import {EmailField, PasswordField, PasswordConfirmField, UploadProfilePicture, SubmitButton, AuthRedirict} from '../../../components/auth/components';
+import { StoreValue, RuleObject } from 'rc-field-form/lib/interface';
 
 export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] => [
     (
@@ -8,7 +9,7 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
             name="email"
             placeholder="Enter your email(@innowise-group.com)"
             rules={[
-                () => ({validator(_: string, value: string) {
+                ({validator(_: RuleObject, value: StoreValue) {
                     const emailRegExp = /.*@innowise-group.com$/;
                     const emptyEmailFieldErrorMessage = 'Email field is required';
                     const invalidEmailErrorMessage = 'Please use email that ends with @innowise-group.com';

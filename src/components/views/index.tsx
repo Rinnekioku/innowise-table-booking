@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {SignUp, SignIn} from '../auth';
 import firebase from 'firebase/app';
-import {FirebaseAuthProvider} from '@react-firebase/auth';
+import {FirebaseAuthProvider, FirebaseAuthConsumer} from '@react-firebase/auth';
 import {config} from '../../core/firebase';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {AuthLinks, ContentLinks} from '../../core/routes';
@@ -12,9 +12,24 @@ import {Header} from './components/header';
 import {ContentsSC} from '../../core/styles/styled';
 import '../../core/styles/style.less';
 import {NotFound} from './components/notFound';
+import {db} from '../../core/firebase';
+import { Provider } from 'react-redux';
+import { store } from '../../core/redux/index';
 
 export function App(): JSX.Element {
     const [user, setUser] = useState<any>(null);
+    const routes = [
+        {
+            path: '/',
+            breadcrumbName: 'Home'
+        },
+        {
+            path: '/offices',
+            breadcrumbName: 'Offices'
+        }
+    ];
+
+    const [offices, setOffices] = useState<any[]>([]);
 
     i18nextInit();
     useEffect(() => {
@@ -23,31 +38,46 @@ export function App(): JSX.Element {
         });
     }, [user]);
 
+    useEffect(() => {
+        const officesRef = db.ref('offices/');
+        officesRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            console.log('Offices', data);
+            setOffices(data);
+        });
+    }, []);
+
     return (
         <Router>
             <FirebaseAuthProvider {...config} firebase={firebase}>
-                <Header/>
-                <ContentsSC>
-                    <Switch>
-                        <Redirect exact from='/' to={AuthLinks.signUp} />
-                        <Route exact path={AuthLinks.signUp}>
-                            <SignUp
-                                config={SignUpConfig}
-                            />
-                        </Route>
-                        <Route path={AuthLinks.signIn}>
-                            <SignIn
-                                config={SignInConfig}
-                            />
-                        </Route>
-                        <Route path={ContentLinks.offices}>
-                            <Offices/>
-                        </Route>
-                        <Route path={ContentLinks.notFound}>
-                            <NotFound/>
-                        </Route>
-                    </Switch>
-                </ContentsSC>
+                <Provider store={store}>
+                    <Header/>
+                    <ContentsSC>
+                        <Switch>
+                            <Redirect exact from='/' to={AuthLinks.signUp} />
+                            <Route exact path={AuthLinks.signUp}>
+                                <SignUp
+                                    config={SignUpConfig}
+                                />
+                            </Route>
+                            <Route path={AuthLinks.signIn}>
+                                <SignIn
+                                    config={SignInConfig}
+                                />
+                            </Route>
+                            <Route path={ContentLinks.offices}>
+                                <Offices
+                                    offices={Object.values(offices)}
+                                    routes={routes}
+                                />
+                            
+                            </Route>
+                            <Route path={ContentLinks.notFound}>
+                                <NotFound/>
+                            </Route>
+                        </Switch>
+                    </ContentsSC>
+                </Provider>
             </FirebaseAuthProvider>
         </Router>
     );

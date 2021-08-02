@@ -1,9 +1,16 @@
 import React from 'react';
+import { Card, Button } from 'antd';
 
-export function Office(): JSX.Element {
+export interface OfficeEntity {
+    id: string,
+    name: string,
+}
+
+export function Office(props: OfficeEntity): JSX.Element {
     return(
-        <div>
-            Office
-        </div>
+        <Card id={props.id}>
+            {props.name}<br/>
+            <Button>View office</Button>
+        </Card>
     );
 }

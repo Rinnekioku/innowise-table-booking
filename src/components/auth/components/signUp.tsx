@@ -1,9 +1,11 @@
 import React from 'react';
 import {FormSC} from '../styled';
 import { useSignUp } from '../../../core/hooks/auth';
+import { UploadFile } from 'antd/lib/upload/interface';
 
 interface SignUpPropsEntity {
-    config: (filiList: any[], setFileList: any) => JSX.Element[],
+    //eslint @typescript-eslint/no-explicit-any
+    config: (filiList: UploadFile[], setFileList: any) => JSX.Element[],
 }
 
 export function SignUp(props: SignUpPropsEntity): JSX.Element {

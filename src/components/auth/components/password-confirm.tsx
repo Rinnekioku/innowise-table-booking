@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Input} from 'antd';
 import {FormFieldEntity} from './index';
 
+
 export function PasswordConfirmField(props: FormFieldEntity): JSX.Element {
     return (
         <Form.Item

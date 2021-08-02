@@ -4,12 +4,13 @@ import {PasswordConfirmField} from './password-confirm';
 import {UploadProfilePicture} from './upload';
 import {SubmitButton} from './submit';
 import {AuthRedirict} from './redirict';
+import { Rule } from 'rc-field-form/lib/interface';
 
 export interface FormFieldEntity {
     name: string,
     dependencies?: string[],
     placeholder: string,
-    rules?: any[],
+    rules?: Rule[],
     hasFeedback: boolean,
 }
 

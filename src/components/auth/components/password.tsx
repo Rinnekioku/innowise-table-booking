@@ -1,8 +1,12 @@
 import React from 'react';
 import {Form, Input} from 'antd';
 import {FormFieldEntity} from './';
+import { useDispatch, useSelector } from 'react-redux';
+import { store } from '../../../core/redux';
 
 export function PasswordField(props: FormFieldEntity): JSX.Element {
+    const dispatch = useDispatch();
+
     return (
         <Form.Item
             name={props.name}
