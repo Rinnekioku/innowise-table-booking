@@ -14,19 +14,9 @@ import '../../core/styles/style.less';
 import { NotFound } from './components/notFound';
 import { Provider } from 'react-redux';
 import { store } from '../../core/redux/index';
+import {OfficesBreadcrumbs} from '../../core/routes';
 
 export function App(): JSX.Element {
-    const routes = [
-        {
-            path: '/',
-            breadcrumbName: 'Home'
-        },
-        {
-            path: '/offices',
-            breadcrumbName: 'Offices'
-        }
-    ];
-
     i18nextInit('en');
 
     return (
@@ -49,7 +39,7 @@ export function App(): JSX.Element {
                             </Route>
                             <Route path={ContentLinks.offices}>
                                 <Offices
-                                    routes={routes}
+                                    routes={OfficesBreadcrumbs}
                                 />
                             
                             </Route>

@@ -39,6 +39,7 @@ export default
         offices: {
             loadingOffices: 'Loading...',
             noOfficesError: 'Sorry we don\'t have offices yet'
-        }
+        },
+        notFound: '404. Sorry, no matches',
     }
 };

@@ -12,7 +12,7 @@ interface OfficesEntity{
 export function Offices(props: OfficesEntity){
     const offices = useSelector((state: any) => state.offices);
     const { t } = useTranslation();
-    
+
     return (
         <>
             <PageHeader

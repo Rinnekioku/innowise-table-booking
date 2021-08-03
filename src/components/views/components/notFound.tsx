@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function NotFound(): JSX.Element {
+    const { t } = useTranslation();
+
     return (
-        <div>
-            404<br/>
-            Sorry no such page
-        </div>
+        <h2>
+            {t('notFound')}
+        </h2>
     );
 }
