@@ -1,15 +1,20 @@
 import React from 'react';
-import {Space, PageHeader} from 'antd';
-import {OfficeEntity, Office} from './components';
-import {Route} from 'antd/lib/breadcrumb/Breadcrumb';
+import { Space, PageHeader } from 'antd';
+import { Office } from './components';
+import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-interface OfficesEntity{
+export interface OfficeEntity {
+    id: string,
+    name: string,
+}
+
+interface OfficesPropsEntity{
     routes: Route[],
 }
 
-export function Offices(props: OfficesEntity){
+export function Offices(props: OfficesPropsEntity){
     const offices = useSelector((state: any) => state.offices);
     const { t } = useTranslation();
 
@@ -27,7 +32,6 @@ export function Offices(props: OfficesEntity){
                                 return (
                                     <Office
                                         key={office.id}
-                                        id={office.id}
                                         name={office.name}
                                     />
                                 );
