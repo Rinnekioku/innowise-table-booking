@@ -1,24 +1,24 @@
-import {useCallback, useState} from 'react';
-import {Form, message} from 'antd';
-import {auth, storage} from '../../firebase';
-import { UploadFile } from 'antd/lib/upload/interface';
+import { Form, message } from 'antd';
+import { auth } from '../../firebase';
+import { useTranslation } from 'react-i18next'; 
 
 export function useSignIn(){
     const [form] = Form.useForm();
+    const { t } = useTranslation();
 
-    const signIn = useCallback(async () => {
+    const signIn = async () => {
         const email = form.getFieldValue(['email']);
         const password = form.getFieldValue(['password']);
         try {
-            const successSingInMessage = 'Signed in successfully';
+            const successSignInMessage = t('auth.signIn.successSignInMessage');
 
             await auth.signInWithEmailAndPassword(email, password);
-            message.success(successSingInMessage);
+            message.success(successSignInMessage);
         } catch(e) {
             message.error(e.message);
             console.error(e);
         }
-    }, [form.getFieldValue(['email']), form.getFieldValue(['password'])]);
+    };
 
     return {form, signIn};
 }

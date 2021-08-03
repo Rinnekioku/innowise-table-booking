@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import en from './translations/en';
 import ru from './translations/ru';
 
-export default function(): void {
+export default function(lng: string): any {
     i18n
         .use(initReactI18next)
         .init({
@@ -11,7 +11,7 @@ export default function(): void {
                 en: en,
                 ru: ru,
             },
-            lng: 'ru',
+            lng: lng,
             fallbackLng: 'en',
 
             interpolation: {

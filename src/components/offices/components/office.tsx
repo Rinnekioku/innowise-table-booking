@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 
@@ -11,11 +11,11 @@ export function Office(props: OfficeEntity): JSX.Element {
     const history = useHistory();
 
     return(
-        <Card id={props.id}>
+        <Card>
             {props.name}<br/>
             <Button
                 onClick={() =>{
-                    history.push('/sign_in');
+                    history.push(`${props.id}/rooms`);
                 }}
             >
                 View office

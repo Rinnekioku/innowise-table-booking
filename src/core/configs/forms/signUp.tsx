@@ -1,18 +1,20 @@
 import React from 'react';
 import {EmailField, PasswordField, PasswordConfirmField, UploadProfilePicture, SubmitButton, AuthRedirict} from '../../../components/auth/components';
 import { StoreValue, RuleObject } from 'rc-field-form/lib/interface';
+import i18n from 'i18next';
 
 export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] => [
     (
+
         <EmailField
             key={1}
             name="email"
-            placeholder="Enter your email(@innowise-group.com)"
+            placeholder={i18n.t('auth.email.placeholder')}
             rules={[
                 ({validator(_: RuleObject, value: StoreValue) {
                     const emailRegExp = /.*@innowise-group.com$/;
-                    const emptyEmailFieldErrorMessage = 'Email field is required';
-                    const invalidEmailErrorMessage = 'Please use email that ends with @innowise-group.com';
+                    const emptyEmailFieldErrorMessage = i18n.t('auth.email.emptyEmailFieldErrorMessage');
+                    const invalidEmailErrorMessage = i18n.t('auth.email.invalidEmailErrorMessage');
 
                     if (value.match(emailRegExp) !== null){
                         console.log(value);
@@ -32,11 +34,12 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
         <PasswordField
             key={2}
             name="password"
+            placeholder={i18n.t('auth.password.placeholder')}
             hasFeedback={true}
             rules={[
                 () => ({validator(_: any, value: string) {
-                    const emptyPasswordFieldErrorMessage = 'Password field is required';
-                    const easyPasswordErrorMessage = 'Password must contain one number, lower and upper case latin letters, at least 8 characters';
+                    const emptyPasswordFieldErrorMessage = i18n.t('auth.password.emptyPasswordFieldErrorMessage');
+                    const easyPasswordErrorMessage = i18n.t('auth.password.easyPasswordErrorMessage');
                     const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
                     if (value.length > 8 && value.match(passwordRegExp)){
@@ -48,20 +51,20 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
                     }
                 }}),
             ]}
-            placeholder="Enter password"
         />
     ),
     (
         <PasswordConfirmField
             key={3}
             name="confirm"
+            placeholder={i18n.t('auth.passwordConfirm.placeholder')}
             dependencies={['password']}
             hasFeedback={true}
             rules={[
                 ({ getFieldValue }: {getFieldValue: any}) => ({
                     validator(_: any, value: string) {
-                        const emptyConfirmPasswordFieldErrorMessage = 'Confirm password field is required';
-                        const invalidConfirmPasswordErrorMessage = 'The two passwords that you entered do not match!';
+                        const emptyConfirmPasswordFieldErrorMessage = i18n.t('auth.passwordConfirm.emptyConfirmPasswordFieldErrorMessage');
+                        const invalidConfirmPasswordErrorMessage = i18n.t('auth.passwordConfirm.invalidConfirmPasswordErrorMessage');
 
                         if (getFieldValue(['password']) === value) {
                             return Promise.resolve();
@@ -73,7 +76,6 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
                     },
                 }),
             ]}
-            placeholder="Confirm password"
         />
     ),
     (
@@ -82,21 +84,21 @@ export const SignUpConfig = (fileList: any[], setFileList: any): JSX.Element[] =
             name="upload"
             fileList={fileList}
             setFileList={setFileList}
-            buttonText="Upload"
+            buttonText={i18n.t('auth.upload.buttonText')}
         />
     ),
     (
         <SubmitButton
             key={5}
             name="sign_up"
-            buttonText="Sign up"
+            buttonText={i18n.t('auth.signUp.buttonText')}
         />
     ),
     (
         <AuthRedirict
             key={6}
-            text='Already have account?&nbsp;'
-            linkText='Sign in'
+            text={i18n.t('auth.signUp.redirictText')}
+            linkText={i18n.t('auth.signUp.linkText')}
             path='/sign_in'
         />
     ),

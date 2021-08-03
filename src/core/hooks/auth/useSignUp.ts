@@ -1,6 +1,7 @@
-import {useCallback, useState} from 'react';
-import {Form, message} from 'antd';
-import {auth, storage} from '../../firebase';
+import { useCallback, useState } from 'react';
+import { Form, message } from 'antd';
+import { auth, storage } from '../../firebase';
+import { useTranslation } from 'react-i18next';
 
 interface useSignUpEntity {
     form: any,
@@ -12,6 +13,7 @@ interface useSignUpEntity {
 export function useSignUp(): useSignUpEntity{
     const [form] = Form.useForm();
     const [fileList, setFileList] = useState<any[]>([]);
+    const { t } = useTranslation();
 
     const signUp = useCallback(async () => {
         const email = form.getFieldValue(['email']);
@@ -26,7 +28,7 @@ export function useSignUp(): useSignUpEntity{
                 contentType: 'image/jpeg',
             };
             const file = fileList[0];
-            const successSignUpMessage = 'Signed up successfully';
+            const successSignUpMessage = t('auth.signUp.successSignUpMessage');
 
             await imgFile.put(file, metadata);
             message.success(successSignUpMessage);

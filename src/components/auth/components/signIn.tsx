@@ -8,12 +8,12 @@ interface SignInPropsEntity {
 
 export function SignIn(props: SignInPropsEntity): JSX.Element {
     const {form, signIn} = useSignIn();
-
+    
     return (
         <FormSC
             form={form}
             onSubmitCapture={signIn}
-            name='sign_up'
+            name='sign_in'
         >
             {props.config}
         </FormSC>

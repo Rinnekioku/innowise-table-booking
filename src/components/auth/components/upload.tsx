@@ -33,7 +33,9 @@ export function UploadProfilePicture(props: UploadPropsEntity): JSX.Element {
         <Form.Item
             name={props.name}
         >
-            <ImgCrop rotate>
+            <ImgCrop
+                rotate
+            >
                 <Upload
                     customRequest={fakeLoad}
                     fileList={props.fileList}
