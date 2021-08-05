@@ -6,7 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,7 +19,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "react-hooks"
     ],
     "rules": {
         "indent": [
@@ -31,19 +33,23 @@
         ],
         "quotes": [
             "error",
-            "double"
+            "single"
         ],
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     },
     "settings": {
         "react": {
-            "createClass": "createReactClass",
-            "pragma": "React",
-            "fragment": "Fragment",
-            "version": "detect"
+          "createClass": "createReactClass", 
+          "pragma": "React",
+          "fragment": "Fragment",
+          "version": "detect"
         },
         "propWrapperFunctions": [
             "forbidExtraProps",
@@ -57,8 +63,8 @@
             {"property": "observer", "object": "<pragma>"}
         ],
         "linkComponents": [
-            "Hyperlink",
-            {"name": "Link", "linkAttribute": "to"}
+          "Hyperlink",
+          {"name": "Link", "linkAttribute": "to"}
         ]
     }
 }
