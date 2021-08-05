@@ -1,10 +1,31 @@
-const initialState: any = {
+import { OfficeEntity } from '../../../../components/offices';
+import { OfficesReducerActions } from './actions';
+
+export interface OfficeStateEntity {
+    isLoaded: boolean,
+    error: boolean,
+    offices: OfficeEntity[],
+}
+
+const initialState: OfficeStateEntity = {
     isLoaded: false,
     error: false,
-    offices: [],
+    offices:[],
 };
 
-export function officesReducer(state: any = initialState, action: any){
+interface OfficesRemoveAddAction {
+    type: OfficesReducerActions.removeOffice | OfficesReducerActions.addOffice,
+    payload: OfficeEntity,
+}
+
+interface OfficesLoadAction {
+    type: OfficesReducerActions.loadOffices,
+    payload: OfficeEntity[],
+}
+
+export type OfficesActions = OfficesRemoveAddAction | OfficesLoadAction;
+
+export function officesReducer(state: OfficeStateEntity = initialState, action: OfficesActions): OfficeStateEntity{
     switch (action.type) {
     case 'LOAD_OFFICES':
         if (action.payload.length === 0){
@@ -12,25 +33,25 @@ export function officesReducer(state: any = initialState, action: any){
                 ...state,
                 isLoaded: true,
                 error: true,
-                offices: [...state.offices, ...action.payload],
+                offices: [...action.payload],
             };
         } else {
             return {
                 ...state,
                 isLoaded: true,
                 error: false,
-                offices: [...state.offices, ...action.payload],
+                offices: [...action.payload],
             };
         }
     case 'ADD_OFFICE':
         return {
             ...state,
-            offices: [...state.offices, ...action.payload],
+            offices: [...state.offices, action.payload],
         };
     case 'REMOVE_OFFICE':
         return {
             ...state,
-            offices: [...state.filter((item: any) => item.id !== action.payload.id)],
+            offices: [...state.offices.filter((item: OfficeEntity) => item.id !== action.payload.id)],
         };
     default:
         return state;

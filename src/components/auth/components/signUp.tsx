@@ -4,7 +4,7 @@ import { useSignUp } from '../../../core/hooks/auth';
 import { UploadFile } from 'antd/lib/upload/interface';
 
 interface SignUpPropsEntity {
-    config: (filiList: UploadFile[], setFileList: any) => JSX.Element[],
+    config: (filiList: UploadFile[], setFileList: React.Dispatch<React.SetStateAction<UploadFile[]>>) => JSX.Element[],
 }
 
 export function SignUp(props: SignUpPropsEntity): JSX.Element {

@@ -8,7 +8,7 @@ import { UploadFile } from 'antd/lib/upload/interface';
 interface UploadPropsEntity{
     name: string,
     fileList: UploadFile[],
-    setFileList: any,
+    setFileList: React.Dispatch<React.SetStateAction<UploadFile[]>>,
     buttonText: string,
 }
 
@@ -16,7 +16,7 @@ export function UploadProfilePicture(props: UploadPropsEntity): JSX.Element {
     const fakeLoad = ({file}: UploadRequestOption) => {
         try {
             const successLoadMessage = 'Picture added successfully';
-            props.setFileList([file]);
+            props.setFileList([file as UploadFile]);
             message.success(successLoadMessage);
         } catch(e) {
             message.error(e.message);

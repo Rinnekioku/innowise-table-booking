@@ -32,16 +32,18 @@ export function App(): JSX.Element {
                                     config={SignUpConfig}
                                 />
                             </Route>
-                            <Route path={AuthLinks.signIn}>
+                            <Route exact path={AuthLinks.signIn}>
                                 <SignIn
                                     config={SignInConfig()}
                                 />
                             </Route>
-                            <Route path={ContentLinks.offices}>
+                            <Route exact path={ContentLinks.offices}>
                                 <Offices
                                     routes={OfficesBreadcrumbs}
                                 />
-                            
+                            </Route>
+                            <Route path={ContentLinks.rooms}>
+                                Render rooms
                             </Route>
                             <Route path={ContentLinks.notFound}>
                                 <NotFound/>

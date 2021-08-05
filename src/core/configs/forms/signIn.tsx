@@ -1,6 +1,7 @@
 import React from 'react';
 import i18n from 'i18next';
 import {EmailField, PasswordField, SubmitButton, AuthRedirict} from '../../../components/auth/components';
+import { AuthLinks } from '../../routes';
 
 export const SignInConfig: () => JSX.Element[] = () => [
     (
@@ -31,7 +32,7 @@ export const SignInConfig: () => JSX.Element[] = () => [
             key={4}
             text={i18n.t('auth.signIn.redirictText')}
             linkText={i18n.t('auth.signIn.linkText')}
-            path='/sign_up'
+            path={AuthLinks.signUp}
         />
     ),
 ];

@@ -1,21 +1,19 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useOfficeToRooms } from '../../../core/hooks/offices';
 
 interface OfficePropsEntity {
     name: string,
 }
 
 export function Office(props: OfficePropsEntity): JSX.Element {
-    const history = useHistory();
+    const goToOffice = useOfficeToRooms(props.name);
 
     return(
         <Card>
             {props.name}<br/>
             <Button
-                onClick={() =>{
-                    history.push(`${props.name}/rooms`);
-                }}
+                onClick={goToOffice}
             >
                 View office
             </Button>

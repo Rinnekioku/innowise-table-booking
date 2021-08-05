@@ -1,8 +1,13 @@
-import { Form, message } from 'antd';
+import { Form, FormInstance, message } from 'antd';
 import { auth } from '../../firebase';
 import { useTranslation } from 'react-i18next'; 
 
-export function useSignIn(){
+interface useSignInEntity {
+    form: FormInstance,
+    signIn: () => void,
+}
+
+export function useSignIn(): useSignInEntity{
     const [form] = Form.useForm();
     const { t } = useTranslation();
 
@@ -16,7 +21,6 @@ export function useSignIn(){
             message.success(successSignInMessage);
         } catch(e) {
             message.error(e.message);
-            console.error(e);
         }
     };
 

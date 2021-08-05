@@ -1,11 +1,13 @@
-interface AuthStateEntity {
+import { AuthReducerActions } from './actions';
+
+export interface AuthStateEntity {
     email: string,
     password: string,
     passwordConfirm: string,
 }
 
-interface AuthActionEntity {
-    type: 'EMAIL_CHANGE' | 'PASSWORD_CHANGE' | 'PASSWORD_CONFIRM_CHANGE',
+export interface AuthActionEntity {
+    type: AuthReducerActions,
     payload: string, 
 }
 
@@ -17,17 +19,17 @@ const initialState: AuthStateEntity = {
 
 export function authReducer(state: AuthStateEntity = initialState, action: AuthActionEntity): AuthStateEntity {
     switch (action.type) {
-    case 'EMAIL_CHANGE':
+    case AuthReducerActions.emailChange:
         return ({
             ...state,
             email: action.payload
         });
-    case 'PASSWORD_CHANGE':
+    case AuthReducerActions.passwordChange:
         return ({
             ...state,
             password: action.payload,
         });
-    case 'PASSWORD_CONFIRM_CHANGE':
+    case AuthReducerActions.passwordConfirmChange:
         return ({
             ...state,
             passwordConfirm: action.payload,
