@@ -16,7 +16,6 @@ export function useOffices(): [OfficeStateEntity, TFunction]{
         const officesRef = db.ref('offices/');
         officesRef.on('value', (snapshot) => {
             const data = snapshot.val();
-            console.log(data);
             dispatch(loadOfficesAction(data));
         });
     }, [dispatch]);

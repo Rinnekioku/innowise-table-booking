@@ -25,7 +25,6 @@ export function useRooms(): [RoomsStateEntity, TFunction]{
         const roomsRef = db.ref(`rooms/${office}`);
         roomsRef.on('value', (snapshot) => {
             const data = snapshot.val();
-            console.log(data);
             dispatch(loadRoomsAction(data));
         });
     }, [dispatch, location, getOfficeFromURL]);
