@@ -1,48 +1,44 @@
 import React from 'react';
 import { Space, PageHeader } from 'antd';
-import { Office } from './components';
+import { Room } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
-import { useOffices } from '../../core/hooks/offices';
+import { useRooms } from '../../core/hooks/rooms/useRooms';
+import { RoomEntity } from './components/room';
 import {renderBreadcrumb} from '../../core/constants/renderBreadcrumb';
 
-export interface OfficeEntity {
-    id: string,
-    name: string,
-}
-
-interface OfficesPropsEntity{
+interface RoomsPropsEntity{
     routes: Route[],
 }
 
-export function Offices (props: OfficesPropsEntity): JSX.Element {
-    const [officesState, t] = useOffices();   
+export function Rooms(props: RoomsPropsEntity): JSX.Element {
+    const [officesState, t] = useRooms();   
 
     if (!officesState.isLoaded) {
         return (
             <>
-                <p>{t('offices.loadingOffices')}</p>
+                <p>{t('rooms.loadingRooms')}</p>
             </>
         );
     } else {
         if (officesState.error) {
             return (
                 <>
-                    <p>{t('offices.noOfficesError')}</p>
+                    <p>{t('rooms.noRoomsError')}</p>
                 </>
             );
         } else {
             return (
                 <>
                     <PageHeader
-                        title={t('offices.title')}
+                        title={t('rooms.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
                     <Space>
-                        {officesState.offices.map((office: OfficeEntity) => {
+                        {officesState.rooms.map((room: RoomEntity) => {
                             return (
-                                <Office
-                                    key={office.id}
-                                    name={office.name}
+                                <Room
+                                    key={room.id}
+                                    id={room.id}
                                 />
                             );
                         })}

@@ -4,7 +4,7 @@ import { OfficesActions } from '../../reducers/offices';
 
 export function loadOfficesAction(payload: OfficeEntity[]): OfficesActions{
     return {
-        type: OfficesReducerActions.loadOffices,
+        type: OfficesReducerActions.load,
         payload: payload
     };
 }

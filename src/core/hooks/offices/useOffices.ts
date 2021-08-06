@@ -4,7 +4,6 @@ import { db } from '../../firebase';
 import { loadOfficesAction } from '../../redux/actions/offices';
 import { useEffect } from 'react';
 import { RootState } from '../../redux';
-import { OfficeEntity } from '../../../components/offices';
 import { OfficeStateEntity } from '../../redux/reducers/offices';
 import { TFunction } from 'i18next';
 
@@ -17,7 +16,8 @@ export function useOffices(): [OfficeStateEntity, TFunction]{
         const officesRef = db.ref('offices/');
         officesRef.on('value', (snapshot) => {
             const data = snapshot.val();
-            dispatch(loadOfficesAction(data.filter( (item: OfficeEntity) => item !== null)));
+            console.log(data);
+            dispatch(loadOfficesAction(data));
         });
     }, [dispatch]);
 

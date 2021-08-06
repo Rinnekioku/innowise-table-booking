@@ -1,11 +1,14 @@
-export const OfficesBreadcrumb = [
+export const RoomsBreadcrumb = [
     {
-        exact: true,
         path: '/',
         breadcrumbName: 'Home'
     },
     {
         path: '/offices',
         breadcrumbName: 'Offices'
+    },
+    {
+        path: '/rooms',
+        breadcrumbName: 'Rooms'
     }
 ];

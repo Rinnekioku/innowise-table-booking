@@ -1,3 +1,3 @@
-import { loadOfficesAction } from './loadAction';
+import { loadOfficesAction } from './load';
 
 export { loadOfficesAction };

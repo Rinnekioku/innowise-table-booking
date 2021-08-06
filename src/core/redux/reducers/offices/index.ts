@@ -7,40 +7,40 @@ export interface OfficeStateEntity {
     offices: OfficeEntity[],
 }
 
+interface OfficesRemoveAddAction {
+    type: OfficesReducerActions.remove | OfficesReducerActions.add,
+    payload: OfficeEntity,
+}
+
+interface OfficesLoadAction {
+    type: OfficesReducerActions.load,
+    payload: OfficeEntity[],
+}
+
+export type OfficesActions = OfficesRemoveAddAction | OfficesLoadAction;
+
 const initialState: OfficeStateEntity = {
     isLoaded: false,
     error: false,
     offices:[],
 };
 
-interface OfficesRemoveAddAction {
-    type: OfficesReducerActions.removeOffice | OfficesReducerActions.addOffice,
-    payload: OfficeEntity,
-}
-
-interface OfficesLoadAction {
-    type: OfficesReducerActions.loadOffices,
-    payload: OfficeEntity[],
-}
-
-export type OfficesActions = OfficesRemoveAddAction | OfficesLoadAction;
-
 export function officesReducer(state: OfficeStateEntity = initialState, action: OfficesActions): OfficeStateEntity{
     switch (action.type) {
     case 'LOAD_OFFICES':
-        if (action.payload.length === 0){
+        if (action.payload?.length){
             return {
                 ...state,
                 isLoaded: true,
-                error: true,
+                error: false,
                 offices: [...action.payload],
             };
         } else {
             return {
                 ...state,
                 isLoaded: true,
-                error: false,
-                offices: [...action.payload],
+                error: true,
+                offices: [],
             };
         }
     case 'ADD_OFFICE':

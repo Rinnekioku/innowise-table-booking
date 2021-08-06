@@ -1,5 +1,5 @@
 export enum OfficesReducerActions {
-    loadOffices = 'LOAD_OFFICES',
-    removeOffice = 'REMOVE_OFFICE',
-    addOffice = 'ADD_OFFICE',
+    load = 'LOAD_OFFICES',
+    remove = 'REMOVE_OFFICE',
+    add = 'ADD_OFFICE',
 }

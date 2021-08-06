@@ -1,5 +1,5 @@
 import { AuthLinks } from './auth';
 import { ContentLinks } from './contents';
-import { OfficesBreadcrumbs } from './offices';
+import { OfficesBreadcrumb } from './offices';
 
-export {AuthLinks, ContentLinks, OfficesBreadcrumbs};
+export {AuthLinks, ContentLinks, OfficesBreadcrumb as OfficesBreadcrumbs};

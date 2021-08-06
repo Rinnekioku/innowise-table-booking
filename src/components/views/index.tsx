@@ -15,6 +15,8 @@ import { NotFound } from './components/notFound';
 import { Provider } from 'react-redux';
 import { store } from '../../core/redux/index';
 import {OfficesBreadcrumbs} from '../../core/routes';
+import { Rooms } from '../rooms';
+import { RoomsBreadcrumb } from '../../core/routes/rooms';
 
 export function App(): JSX.Element {
     i18nextInit('en');
@@ -42,8 +44,10 @@ export function App(): JSX.Element {
                                     routes={OfficesBreadcrumbs}
                                 />
                             </Route>
-                            <Route path={ContentLinks.rooms}>
-                                Render rooms
+                            <Route exact path={ContentLinks.rooms}>
+                                <Rooms
+                                    routes={RoomsBreadcrumb}
+                                />
                             </Route>
                             <Route path={ContentLinks.notFound}>
                                 <NotFound/>

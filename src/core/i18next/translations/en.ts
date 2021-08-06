@@ -37,8 +37,14 @@ export default
             }
         },
         offices: {
+            title: 'Offices',
             loadingOffices: 'Loading...',
             noOfficesError: 'Sorry we don\'t have offices yet'
+        },
+        rooms: {
+            title: 'Rooms',
+            loadingRooms: 'Loading...',
+            noRoomsError: 'Sorry we don\'t have rooms in this office yet'
         },
         notFound: '404. Sorry, no matches',
     }
