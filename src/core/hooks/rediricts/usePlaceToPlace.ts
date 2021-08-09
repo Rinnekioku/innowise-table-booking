@@ -3,15 +3,16 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 
-export function useOfficeToRooms(name: string): [() => void, TFunction] {
+export function usePlaceToPlace(path: string): [() => void, TFunction] {
     const history = useHistory();
     const location = useLocation();
     const { t } = useTranslation();
 
-    const goToOffice = useCallback(() => {
+    const goToPlace = useCallback(() => {
         const clearDoubleSlash = /[/][/]/;
-        history.push(`${location.pathname}/${name}/rooms`.replace(clearDoubleSlash, '/').toLocaleLowerCase());
-    }, [location, history, name]);
+        const finishPath = `${location.pathname}/${path}`.replace(clearDoubleSlash, '/').toLocaleLowerCase();
+        history.push(finishPath);
+    }, [history, location, path]);
 
-    return [goToOffice, t];
+    return [goToPlace, t];
 }

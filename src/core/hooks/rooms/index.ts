@@ -1,3 +1,3 @@
-import { useRoomToTables } from './useRoomToTables';
+import { useRooms } from './useRooms';
 
-export { useRoomToTables };
+export { useRooms };

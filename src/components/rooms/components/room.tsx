@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import { useRoomToTables } from '../../../core/hooks/rooms';
+import { usePlaceToPlace } from '../../../core/hooks/rediricts/usePlaceToPlace';
 
 export interface RoomEntity {
     id: string,
 }
 
 export function Room(props: RoomEntity): JSX.Element {
-    const [goToRoom, t] = useRoomToTables(props.id);
+    const [goToRoom, t] = usePlaceToPlace(`${props.id}/tables`);
 
     return(
         <Card>

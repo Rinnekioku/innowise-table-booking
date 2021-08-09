@@ -2,7 +2,7 @@ import React from 'react';
 import { Space, PageHeader } from 'antd';
 import { Room } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
-import { useRooms } from '../../core/hooks/rooms/useRooms';
+import { useRooms } from '../../core/hooks/rooms';
 import { RoomEntity } from './components/room';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 
@@ -16,6 +16,10 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
     if (!roomsState.isLoaded) {
         return (
             <>
+                <PageHeader
+                    title={t('rooms.title')}
+                    breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
+                />
                 <p>{t('rooms.loadingRooms')}</p>
             </>
         );
@@ -23,6 +27,10 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
         if (roomsState.error) {
             return (
                 <>
+                    <PageHeader
+                        title={t('rooms.title')}
+                        breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
+                    />
                     <p>{t('rooms.noRoomsError')}</p>
                 </>
             );

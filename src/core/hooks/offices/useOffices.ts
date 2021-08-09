@@ -13,7 +13,8 @@ export function useOffices(): [OfficeStateEntity, TFunction]{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const officesRef = db.ref('offices/');
+        const officesPath = 'offices/';
+        const officesRef = db.ref(officesPath);
         officesRef.on('value', (snapshot) => {
             const data = snapshot.val();
             dispatch(loadOfficesAction(data));

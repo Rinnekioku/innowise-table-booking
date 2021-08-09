@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import { useOfficeToRooms } from '../../../core/hooks/offices';
+import { usePlaceToPlace } from '../../../core/hooks/rediricts/usePlaceToPlace';
 
 interface OfficePropsEntity {
     name: string,
 }
 
 export function Office(props: OfficePropsEntity): JSX.Element {
-    const [goToOffice, t] = useOfficeToRooms(props.name);
+    const [goToOffice, t] = usePlaceToPlace(`${props.name}/rooms`);
 
     return(
         <Card>

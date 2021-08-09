@@ -16,6 +16,10 @@ export function Tables(props: TablePropsEntity): JSX.Element {
     if (!tablesState.isLoaded) {
         return (
             <>
+                <PageHeader
+                    title={t('tables.title')}
+                    breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
+                />
                 <p>{t('tables.loadingTables')}</p>
             </>
         );
@@ -23,6 +27,10 @@ export function Tables(props: TablePropsEntity): JSX.Element {
         if (tablesState.error) {
             return (
                 <>
+                    <PageHeader
+                        title={t('tables.title')}
+                        breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
+                    />
                     <p>{t('tables.noTablesError')}</p>
                 </>
             );

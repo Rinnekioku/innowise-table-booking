@@ -4,6 +4,7 @@ import { auth, storage } from '../../firebase';
 import { useTranslation } from 'react-i18next';
 import {FormInstance} from 'antd/lib/form/';
 import {UploadFile} from 'antd/lib/upload/interface';
+import { useAlreadyAuthorized } from './useAlreadyAuthorized';
 
 export function useSignUp(): [FormInstance, UploadFile[], React.Dispatch<React.SetStateAction<UploadFile[]>>, () => Promise<void>] {
     const [form] = Form.useForm();
@@ -36,6 +37,8 @@ export function useSignUp(): [FormInstance, UploadFile[], React.Dispatch<React.S
             message.error(e.message);
         }
     };
+
+    useAlreadyAuthorized();
 
     return [form, fileList, setFileList, signUp];
 }

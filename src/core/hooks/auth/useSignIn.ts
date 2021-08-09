@@ -1,10 +1,11 @@
 import { Form, FormInstance, message } from 'antd';
 import { auth } from '../../firebase';
 import { useTranslation } from 'react-i18next'; 
+import { useAlreadyAuthorized } from './useAlreadyAuthorized';
 
 export function useSignIn(): [FormInstance, () => void]{
     const [form] = Form.useForm();
-    const { t } = useTranslation();
+    const { t } = useTranslation();  
 
     const signIn = async () => {
         const email = form.getFieldValue(['email']);
@@ -18,6 +19,8 @@ export function useSignIn(): [FormInstance, () => void]{
             message.error(e.message);
         }
     };
+
+    useAlreadyAuthorized();
 
     return [form, signIn];
 }
