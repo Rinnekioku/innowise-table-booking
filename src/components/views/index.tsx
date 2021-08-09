@@ -1,24 +1,24 @@
 import React from 'react';
-import {SignUp, SignIn} from '../auth';
+import { SignUp, SignIn } from '../auth';
 import firebase from 'firebase/app';
-import {FirebaseAuthProvider} from '@react-firebase/auth';
-import {config} from '../../core/firebase';
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import {AuthLinks, ContentLinks} from '../../core/routes';
-import {SignUpConfig, SignInConfig} from '../../core/configs';
-import {Offices} from '../offices';
-import {Header} from './components/header';
-import {ContentsSC} from '../../core/styles/styled';
+import { FirebaseAuthProvider } from '@react-firebase/auth';
+import { config } from '../../core/firebase';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { AuthLinks, ContentLinks } from '../../core/routes';
+import { SignUpConfig, SignInConfig } from '../../core/configs';
+import { Offices } from '../offices';
+import { Header } from './components/header';
+import { ContentsSC } from '../../core/styles/styled';
 import i18nextInit from '../../core/i18next';
-import '../../core/styles/style.less';
 import { NotFound } from './components/notFound';
 import { Provider } from 'react-redux';
 import { store } from '../../core/redux/index';
-import {OfficesBreadcrumbs} from '../../core/routes';
+import { OfficesBreadcrumbs } from '../../core/routes';
 import { Rooms } from '../rooms';
 import { RoomsBreadcrumb } from '../../core/routes/rooms';
 import { Tables } from '../tables';
 import { TablesBreadcrumb } from '../../core/routes/tables';
+import '../../core/styles/style.less';
 
 export function App(): JSX.Element {
     i18nextInit('en');

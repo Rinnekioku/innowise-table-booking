@@ -1,6 +1,7 @@
 import { AuthReducerActions } from './actions';
 
 export interface AuthStateEntity {
+    userId: string,
     email: string,
     password: string,
     passwordConfirm: string,
@@ -12,6 +13,7 @@ export interface AuthActionEntity {
 }
 
 const initialState: AuthStateEntity = {
+    userId: '',
     email: '',
     password: '',
     passwordConfirm: '',
@@ -19,6 +21,11 @@ const initialState: AuthStateEntity = {
 
 export function authReducer(state: AuthStateEntity = initialState, action: AuthActionEntity): AuthStateEntity {
     switch (action.type) {
+    case AuthReducerActions.setUser:
+        return ({
+            ...state,
+            userId: action.payload,
+        });
     case AuthReducerActions.emailChange:
         return ({
             ...state,

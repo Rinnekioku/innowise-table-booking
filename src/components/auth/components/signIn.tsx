@@ -7,7 +7,7 @@ interface SignInPropsEntity {
 }
 
 export function SignIn(props: SignInPropsEntity): JSX.Element {
-    const {form, signIn} = useSignIn();
+    const [form, signIn] = useSignIn();
     
     return (
         <FormSC

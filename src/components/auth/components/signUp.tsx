@@ -8,7 +8,7 @@ interface SignUpPropsEntity {
 }
 
 export function SignUp(props: SignUpPropsEntity): JSX.Element {
-    const {form, fileList, setFileList, signUp} = useSignUp();
+    const [form, fileList, setFileList, signUp] = useSignUp();
 
     return (
         <FormSC
