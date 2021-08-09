@@ -7,7 +7,7 @@ interface OfficePropsEntity {
 }
 
 export function Office(props: OfficePropsEntity): JSX.Element {
-    const goToOffice = useOfficeToRooms(props.name);
+    const [goToOffice, t] = useOfficeToRooms(props.name);
 
     return(
         <Card>
@@ -15,7 +15,7 @@ export function Office(props: OfficePropsEntity): JSX.Element {
             <Button
                 onClick={goToOffice}
             >
-                View office
+                {t('offices.viewOffice')}
             </Button>
         </Card>
     );

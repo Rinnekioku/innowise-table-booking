@@ -7,7 +7,7 @@ export interface RoomEntity {
 }
 
 export function Room(props: RoomEntity): JSX.Element {
-    const goToRoom = useRoomToTables(props.id);
+    const [goToRoom, t] = useRoomToTables(props.id);
 
     return(
         <Card>
@@ -15,7 +15,7 @@ export function Room(props: RoomEntity): JSX.Element {
             <Button
                 onClick={goToRoom}
             >
-                View room
+                {t('rooms.viewRoom')}
             </Button>
         </Card>
     );

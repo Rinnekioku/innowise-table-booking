@@ -38,13 +38,21 @@ export default
         },
         offices: {
             title: 'Offices',
-            loadingOffices: 'Loading...',
-            noOfficesError: 'Sorry we don\'t have offices yet'
+            loadingOffices: 'Offices are loading...',
+            noOfficesError: 'Sorry we don\'t have offices yet',
+            viewOffice: 'View office',
         },
         rooms: {
             title: 'Rooms',
-            loadingRooms: 'Loading...',
-            noRoomsError: 'Sorry we don\'t have rooms in this office yet'
+            loadingRooms: 'Rooms are loading...',
+            noRoomsError: 'Sorry we don\'t have rooms in this office yet',
+            viewRoom: 'View room',
+        },
+        tables: {
+            title: 'Tables',
+            loadingTables: 'Tables are loading...',
+            noTablesError: 'Sorry, we don\'t have tables in this room yet',
+            bookTable: 'Book table'
         },
         notFound: '404. Sorry, no matches',
     }

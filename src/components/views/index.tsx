@@ -17,6 +17,8 @@ import { store } from '../../core/redux/index';
 import {OfficesBreadcrumbs} from '../../core/routes';
 import { Rooms } from '../rooms';
 import { RoomsBreadcrumb } from '../../core/routes/rooms';
+import { Tables } from '../tables';
+import { TablesBreadcrumb } from '../../core/routes/tables';
 
 export function App(): JSX.Element {
     i18nextInit('en');
@@ -47,6 +49,11 @@ export function App(): JSX.Element {
                             <Route exact path={ContentLinks.rooms}>
                                 <Rooms
                                     routes={RoomsBreadcrumb}
+                                />
+                            </Route>
+                            <Route exact path={ContentLinks.tables}>
+                                <Tables
+                                    routes={TablesBreadcrumb}
                                 />
                             </Route>
                             <Route path={ContentLinks.notFound}>
