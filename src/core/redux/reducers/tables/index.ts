@@ -1,48 +1,48 @@
 import { TableEntity } from '../../../../components/tables/components/table';
 import { TablesReducerActions } from './actions';
+import { TablesActionsType } from './actions';
 
 export interface TablesStateEntity {
-    isLoaded: boolean,
+    isLoading: boolean,
     error: boolean,
     tables: TableEntity[],
 }
 
-interface TablesRemoveAddAction {
-    type: TablesReducerActions.remove | TablesReducerActions.add,
-    payload: TableEntity,
-}
-
-interface TablesLoadAction {
-    type: TablesReducerActions.load,
-    payload: TableEntity[],
-}
-
-export type TablesActions = TablesRemoveAddAction | TablesLoadAction;
-
 const initialState: TablesStateEntity = {
-    isLoaded: false,
+    isLoading: true,
     error: false,
     tables: [],
 };
 
-export function tablesReducer(state: TablesStateEntity = initialState, action: TablesActions): TablesStateEntity {
+export function tablesReducer(state: TablesStateEntity = initialState, action: TablesActionsType): TablesStateEntity {
     switch (action.type){
     case TablesReducerActions.load:
         if (action.payload?.length){
             return {
                 ...state,
-                isLoaded: true,
-                error: false,
                 tables: [...action.payload],
             };
         } else {
             return {
                 ...state,
-                isLoaded: true,
-                error: true,
                 tables: [],
             };
         }
+    case TablesReducerActions.drop:
+        return {
+            ...state,
+            tables: [],
+        };
+    case TablesReducerActions.error:
+        return {
+            ...state,
+            error: action.payload,
+        };
+    case TablesReducerActions.loading:
+        return {
+            ...state,
+            isLoading: action.payload
+        };
     case TablesReducerActions.add:
         return {
             ...state,

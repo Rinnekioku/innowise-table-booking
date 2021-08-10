@@ -6,10 +6,10 @@ import { RootState } from '../../redux';
 import { TFunction } from 'i18next';
 import { useLocation } from 'react-router-dom';
 import { TablesStateEntity } from '../../redux/reducers/tables';
-import { loadTablesAction } from '../../redux/actions/tables';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useOfficeFromURL } from '../dataFromURL/useOfficeFromURL';
 import { useRoomIdFromURL } from '../dataFromURL/useRoomIdFromURL';
+import { TablesReducerActions } from '../../redux/reducers/tables/actions';
 
 export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[]]{
     const tablesState = useSelector((state: RootState) => state.tables);
@@ -27,7 +27,7 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
         const tablesRef = db.ref(tablesPath);
         tablesRef.on('value', (snapshot) => {
             const data = snapshot.val();
-            dispatch(loadTablesAction(data));
+            dispatch({type: TablesReducerActions.sagaLoad ,payload: data});
         });
     }, [dispatch, location, getOfficeFromURL, getRoomIdFromURL]);
 

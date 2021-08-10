@@ -54,6 +54,9 @@ export default
             noTablesError: 'Sorry, we don\'t have tables in this room yet',
             bookTable: 'Book table'
         },
+        book: {
+            modalTitle: 'Book table',
+        },
         notFound: '404. Sorry, no matches',
     }
 };

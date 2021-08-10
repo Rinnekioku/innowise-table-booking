@@ -16,7 +16,7 @@ interface TablePropsEntity{
 export function Tables(props: TablePropsEntity): JSX.Element {
     const [tablesState, t, routes] = useTables(props.routes);
 
-    if (!tablesState.isLoaded) {
+    if (tablesState.isLoading) {
         return (
             <>
                 <PageHeader

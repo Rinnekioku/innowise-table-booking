@@ -1,48 +1,48 @@
 import { RoomEntity } from '../../../../components/rooms/components/room';
 import { RoomsReducerActions } from './actions';
+import { RoomsActionsType } from './actions';
 
 export interface RoomsStateEntity {
-    isLoaded: boolean,
+    isLoading: boolean,
     error: boolean,
     rooms: RoomEntity[],
 }
 
-interface RoomsRemoveAddAction {
-    type: RoomsReducerActions.remove | RoomsReducerActions.add,
-    payload: RoomEntity,
-}
-
-interface RoomsLoadAction {
-    type: RoomsReducerActions.load,
-    payload: RoomEntity[],
-}
-
-export type RoomsActions = RoomsRemoveAddAction | RoomsLoadAction;
-
 const initialState: RoomsStateEntity = {
-    isLoaded: false,
+    isLoading: true,
     error: false,
     rooms: [],
 };
 
-export function roomsReducer(state: RoomsStateEntity = initialState, action: RoomsActions): RoomsStateEntity {
+export function roomsReducer(state: RoomsStateEntity = initialState, action: RoomsActionsType): RoomsStateEntity {
     switch (action.type){
-    case RoomsReducerActions.load:
+    case RoomsReducerActions.loadRooms:
         if (action.payload?.length){
             return {
                 ...state,
-                isLoaded: true,
-                error: false,
                 rooms: [...action.payload],
             };
         } else {
             return {
                 ...state,
-                isLoaded: true,
-                error: true,
                 rooms: [],
             };
         }
+    case RoomsReducerActions.drop:
+        return {
+            ...state,
+            rooms: []
+        };
+    case RoomsReducerActions.loading:
+        return {
+            ...state,
+            isLoading: action.payload,
+        };
+    case RoomsReducerActions.error:
+        return {
+            ...state,
+            error: action.payload,
+        };
     case RoomsReducerActions.add:
         return {
             ...state,

@@ -6,8 +6,9 @@ import { RootState } from '../../redux';
 import { TFunction } from 'i18next';
 import { useLocation } from 'react-router-dom';
 import { RoomsStateEntity } from '../../redux/reducers/rooms';
-import { loadRoomsAction } from '../../redux/actions/rooms';
 import { useOfficeFromURL } from '../dataFromURL/useOfficeFromURL';
+import { RoomsReducerActions } from '../../redux/reducers/rooms/actions';
+import { TablesReducerActions } from '../../redux/reducers/tables/actions';
 
 export function useRooms(): [RoomsStateEntity, TFunction]{
     const roomsState = useSelector((state: RootState) => state.rooms);
@@ -22,7 +23,8 @@ export function useRooms(): [RoomsStateEntity, TFunction]{
         const roomsRef = db.ref(roomsPath);
         roomsRef.on('value', (snapshot) => {
             const data = snapshot.val();
-            dispatch(loadRoomsAction(data));
+            dispatch({type: RoomsReducerActions.sagaLoad ,payload:data});
+            dispatch({type: TablesReducerActions.sagaDrop});
         });
     }, [dispatch, getOfficeFromURL]);
 

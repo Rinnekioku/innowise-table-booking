@@ -16,7 +16,7 @@ interface RoomsPropsEntity{
 export function Rooms(props: RoomsPropsEntity): JSX.Element {
     const [roomsState, t] = useRooms();   
 
-    if (!roomsState.isLoaded) {
+    if (roomsState.isLoading) {
         return (
             <>
                 <PageHeader

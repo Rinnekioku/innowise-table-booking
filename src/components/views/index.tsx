@@ -27,7 +27,6 @@ export function App(): JSX.Element {
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user){
-                console.log('user id is', user.uid);
                 dispatch({
                     type: 'SET_USER', 
                     payload: {
