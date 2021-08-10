@@ -1,10 +1,13 @@
 import React from 'react';
-import { Space, PageHeader } from 'antd';
+import { Row, Col, PageHeader } from 'antd';
 import { Table } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { TableEntity } from './components/table';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { useTables } from '../../core/hooks/tables';
+import { Loader } from '../../core/constants/loader';
+import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { ErrorBlock } from '../../core/constants/errorBlock';
 
 interface TablePropsEntity{
     routes: Route[],
@@ -20,7 +23,9 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                     title={t('tables.title')}
                     breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
                 />
-                <p>{t('tables.loadingTables')}</p>
+                <Row justify={loaderAlign}>
+                    <Loader/>
+                </Row>
             </>
         );
     } else {
@@ -31,7 +36,9 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                         title={t('tables.title')}
                         breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
                     />
-                    <p>{t('tables.noTablesError')}</p>
+                    <Row justify={errorAlign}>
+                        <ErrorBlock errorText={t('tables.noTablesError')}/>
+                    </Row>
                 </>
             );
         } else {
@@ -41,16 +48,18 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                         title={t('tables.title')}
                         breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
                     />
-                    <Space>
+                    <Row gutter={blockMargin}>
                         {tablesState.tables.map((room: TableEntity) => {
                             return (
-                                <Table
-                                    key={room.id}
-                                    id={room.id}
-                                />
+                                <Col span={blockSpan} key={room.id}>
+                                    <Table
+                                        
+                                        id={room.id}
+                                    />
+                                </Col>
                             );
                         })}
-                    </Space>
+                    </Row>
                 </>
             );
         }

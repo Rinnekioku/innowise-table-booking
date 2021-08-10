@@ -1,9 +1,12 @@
 import React from 'react';
-import { Space, PageHeader } from 'antd';
+import { Row, Col, PageHeader } from 'antd';
 import { Office } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useOffices } from '../../core/hooks/offices';
 import {renderBreadcrumb} from '../../core/constants/renderBreadcrumb';
+import { Loader } from '../../core/constants/loader';
+import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { ErrorBlock } from '../../core/constants/errorBlock';
 
 export interface OfficeEntity {
     id: string,
@@ -24,7 +27,9 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                     title={t('offices.title')}
                     breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                 />
-                <p>{t('offices.loadingOffices')}</p>
+                <Row justify={loaderAlign}>
+                    <Loader/>
+                </Row>
             </>
         );
     } else {
@@ -35,7 +40,9 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                         title={t('offices.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <p>{t('offices.noOfficesError')}</p>
+                    <Row justify={errorAlign}>
+                        <ErrorBlock errorText={t('offices.noOfficesError')}/>
+                    </Row>
                 </>
             );
         } else {
@@ -44,17 +51,18 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                     <PageHeader
                         title={t('offices.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
-                    /> 
-                    <Space>
+                    />
+                    <Row gutter={blockMargin}>
                         {officesState.offices.map((office: OfficeEntity) => {
                             return (
-                                <Office
-                                    key={office.id}
-                                    name={office.name}
-                                />
+                                <Col span={blockSpan} key={office.id}>
+                                    <Office
+                                        name={office.name}
+                                    />
+                                </Col>
                             );
                         })}
-                    </Space>
+                    </Row>
                 </>
             );
         }

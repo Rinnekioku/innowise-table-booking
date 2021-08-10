@@ -1,10 +1,13 @@
 import React from 'react';
-import { Space, PageHeader } from 'antd';
+import { Row, Col, PageHeader } from 'antd';
 import { Room } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useRooms } from '../../core/hooks/rooms';
 import { RoomEntity } from './components/room';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
+import { Loader } from '../../core/constants/loader';
+import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { ErrorBlock } from '../../core/constants/errorBlock';
 
 interface RoomsPropsEntity{
     routes: Route[],
@@ -20,7 +23,9 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                     title={t('rooms.title')}
                     breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                 />
-                <p>{t('rooms.loadingRooms')}</p>
+                <Row justify={loaderAlign}>
+                    <Loader/>
+                </Row>
             </>
         );
     } else {
@@ -31,7 +36,9 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                         title={t('rooms.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <p>{t('rooms.noRoomsError')}</p>
+                    <Row justify={errorAlign}>
+                        <ErrorBlock errorText={t('rooms.noRoomsError')}/>
+                    </Row>
                 </>
             );
         } else {
@@ -41,16 +48,18 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                         title={t('rooms.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <Space>
+                    <Row gutter={blockMargin}>
                         {roomsState.rooms.map((room: RoomEntity) => {
                             return (
-                                <Room
-                                    key={room.id}
-                                    id={room.id}
-                                />
+                                <Col span={blockSpan} key={room.id}>
+                                    <Room
+                                        
+                                        id={room.id}
+                                    />
+                                </Col>
                             );
                         })}
-                    </Space>
+                    </Row>
                 </>
             );
         }

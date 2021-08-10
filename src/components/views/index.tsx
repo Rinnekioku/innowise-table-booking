@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { SignUp, SignIn } from '../auth';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { AuthLinks, ContentLinks } from '../../core/routes';
 import { SignUpConfig, SignInConfig } from '../../core/configs';
 import { Offices } from '../offices';
@@ -17,6 +17,7 @@ import '../../core/styles/style.less';
 import { auth } from '../../core/firebase';
 import { useDispatch } from 'react-redux';
 import { PrivateRoute } from '../../core/constants/privateRoute';
+import { PublicRoute } from '../../core/constants/publicRoute';
 
 export function App(): JSX.Element {
     i18nextInit('en');
@@ -44,34 +45,60 @@ export function App(): JSX.Element {
             <ContentsSC>
                 <Switch>
                     <Redirect exact from='/' to={AuthLinks.signIn} />
-                    <Route exact path={AuthLinks.signUp}>
+
+                    <PublicRoute 
+                        exact 
+                        path={AuthLinks.signUp} 
+                        restricted
+                    >
                         <SignUp
                             config={SignUpConfig}
                         />
-                    </Route>
-                    <Route exact path={AuthLinks.signIn}>
+                    </PublicRoute>
+
+                    <PublicRoute 
+                        exact 
+                        path={AuthLinks.signIn} 
+                        restricted
+                    >
                         <SignIn
                             config={SignInConfig()}
                         />
-                    </Route>
-                    <PrivateRoute exact path={ContentLinks.offices}>
+                    </PublicRoute>
+
+                    <PrivateRoute 
+                        exact 
+                        path={ContentLinks.offices}
+                    >
                         <Offices
                             routes={OfficesBreadcrumbs}
                         />
                     </PrivateRoute>
-                    <PrivateRoute exact path={ContentLinks.rooms}>
+
+                    <PrivateRoute 
+                        exact
+                        path={ContentLinks.rooms}
+                    >
                         <Rooms
                             routes={RoomsBreadcrumb}
                         />
                     </PrivateRoute>
-                    <PrivateRoute exact path={ContentLinks.tables}>
+
+                    <PrivateRoute 
+                        exact
+                        path={ContentLinks.tables}
+                    >
                         <Tables
                             routes={TablesBreadcrumb}
                         />
                     </PrivateRoute>
-                    <Route path={ContentLinks.notFound}>
+
+                    <PublicRoute 
+                        path={ContentLinks.notFound}
+                        restricted={false}
+                    >
                         <NotFound/>
-                    </Route>
+                    </PublicRoute>
                 </Switch>
             </ContentsSC>
         </Router>
