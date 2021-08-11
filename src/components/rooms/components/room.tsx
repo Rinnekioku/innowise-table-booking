@@ -10,8 +10,7 @@ export function Room(props: RoomEntity): JSX.Element {
     const [goToRoom, t] = usePlaceToPlace(`${props.id}/tables`);
 
     return(
-        <Card>
-            {props.id}<br/>
+        <Card title={props.id}>
             <Button
                 onClick={goToRoom}
             >

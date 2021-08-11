@@ -1,18 +1,18 @@
 export const TablesBreadcrumb = [
     {
         path: '/',
-        breadcrumbName: 'Home'
+        breadcrumbName: 'breadcrumbNames.home'
     },
     {
         path: '/offices',
-        breadcrumbName: 'Offices'
+        breadcrumbName: 'breadcrumbNames.offices'
     },
     {
         path: '/offices/:name/rooms',
-        breadcrumbName: 'Rooms'
+        breadcrumbName: 'breadcrumbNames.rooms'
     },
     {
         path: '/offices/:name/rooms/:id/tables',
-        breadcrumbName: 'Tables'
+        breadcrumbName: 'breadcrumbNames.tables'
     }
 ];

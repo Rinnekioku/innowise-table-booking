@@ -28,8 +28,7 @@ export function Table(props: TableEntity): JSX.Element {
 
     return(
         <>
-            <Card>
-                {props.id}<br/>
+            <Card title={props.id}>
                 <Button onClick={showModal}>
                     View room
                 </Button>

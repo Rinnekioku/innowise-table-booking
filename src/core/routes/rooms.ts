@@ -1,14 +1,14 @@
 export const RoomsBreadcrumb = [
     {
         path: '/',
-        breadcrumbName: 'Home'
+        breadcrumbName: 'breadcrumbNames.home'
     },
     {
         path: '/offices',
-        breadcrumbName: 'Offices'
+        breadcrumbName: 'breadcrumbNames.offices'
     },
     {
         path: '/rooms',
-        breadcrumbName: 'Rooms'
+        breadcrumbName: 'breadcrumbNames.rooms'
     }
 ];

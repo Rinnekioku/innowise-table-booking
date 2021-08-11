@@ -10,8 +10,7 @@ export function Office(props: OfficePropsEntity): JSX.Element {
     const [goToOffice, t] = usePlaceToPlace(`${props.name}/rooms`);
 
     return(
-        <Card>
-            {props.name}<br/>
+        <Card title={props.name}>
             <Button
                 onClick={goToOffice}
             >

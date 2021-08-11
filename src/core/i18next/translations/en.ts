@@ -57,6 +57,12 @@ export default
         book: {
             modalTitle: 'Book table',
         },
+        breadcrumbNames: {
+            home: 'Home',
+            offices: 'Offices',
+            rooms: 'Rooms',
+            tables: 'Tables',
+        },
         notFound: '404. Sorry, no matches',
     }
 };
