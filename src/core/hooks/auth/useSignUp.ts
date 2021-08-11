@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { Form, message } from 'antd';
 import { auth, storage } from '../../firebase';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +6,7 @@ import {FormInstance} from 'antd/lib/form/';
 import {UploadFile} from 'antd/lib/upload/interface';
 import { useAlreadyAuthorized } from './useAlreadyAuthorized';
 
-export function useSignUp(): [FormInstance, UploadFile[], React.Dispatch<React.SetStateAction<UploadFile[]>>, () => Promise<void>] {
+export function useSignUp(): [FormInstance, UploadFile[], Dispatch<SetStateAction<UploadFile[]> >, () => Promise<void>] {
     const [form] = Form.useForm();
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const { t } = useTranslation();

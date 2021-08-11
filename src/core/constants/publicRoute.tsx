@@ -10,12 +10,12 @@ export interface PublicRoutePropsEntity extends RouteProps{
 }
 
 export function PublicRoute({children, restricted,  ...rest}: PublicRoutePropsEntity): JSX.Element {
-    const user = useSelector((state: RootState) => state.auth.user);
+    const auth = useSelector((state: RootState) => state.auth);
     return(
         <Route 
             {...rest} 
             render={() => (
-                user.isLoggedIn && restricted ? <Redirect to={ContentLinks.offices}/> : children
+                auth.isLoggedIn && restricted ? <Redirect to={ContentLinks.offices}/> : children
             )}
         />
     );

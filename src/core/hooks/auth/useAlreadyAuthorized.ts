@@ -4,11 +4,11 @@ import { useHistory } from 'react-router';
 import { RootState } from '../../redux';
 
 export function useAlreadyAuthorized(): void {
-    const user = useSelector((state: RootState) => state.auth.user);
+    const auth = useSelector((state: RootState) => state.auth);
     const history = useHistory();
 
     useEffect(() => {
-        if (user.isLoggedIn){
+        if (auth.isLoggedIn){
             history.push('/offices');
         }
     });

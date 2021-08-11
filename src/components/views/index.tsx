@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { SignUp, SignIn } from '../auth';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { AuthLinks, ContentLinks } from '../../core/routes';
-import { SignUpConfig, SignInConfig } from '../../core/configs';
 import { Offices } from '../offices';
 import { Header } from './components/header';
 import { ContentsSC } from '../../core/styles/styled';
@@ -18,6 +16,8 @@ import { auth } from '../../core/firebase';
 import { useDispatch } from 'react-redux';
 import { PrivateRoute } from '../../core/constants/privateRoute';
 import { PublicRoute } from '../../core/constants/publicRoute';
+import { AuthReducerActions } from '../../core/redux/reducers/auth/actions';
+import { AuthRoute } from './components/auth';
 
 export function App(): JSX.Element {
     i18nextInit('en');
@@ -25,14 +25,12 @@ export function App(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        auth.signOut();
         auth.onAuthStateChanged((user) => {
             if (user){
                 dispatch({
-                    type: 'SET_USER', 
-                    payload: {
-                        isLoggedIn: true,
-                        userId: user.uid
-                    }
+                    type: AuthReducerActions.signIn, 
+                    payload:  user.uid,
                 });
             }
         });
@@ -42,28 +40,11 @@ export function App(): JSX.Element {
         <Router>
             <Header/>
             <ContentsSC>
+
+                <AuthRoute/>
+
                 <Switch>
                     <Redirect exact from='/' to={AuthLinks.signIn} />
-
-                    <PublicRoute 
-                        exact 
-                        path={AuthLinks.signUp} 
-                        restricted
-                    >
-                        <SignUp
-                            config={SignUpConfig}
-                        />
-                    </PublicRoute>
-
-                    <PublicRoute 
-                        exact 
-                        path={AuthLinks.signIn} 
-                        restricted
-                    >
-                        <SignIn
-                            config={SignInConfig()}
-                        />
-                    </PublicRoute>
 
                     <PrivateRoute 
                         exact 

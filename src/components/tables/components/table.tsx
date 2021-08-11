@@ -30,7 +30,7 @@ export function Table(props: TableEntity): JSX.Element {
         <>
             <Card title={props.id}>
                 <Button onClick={showModal}>
-                    View room
+                    {t('tables.bookTable')}
                 </Button>
             </Card>
             <Modal title={t('book.modalTitle')} visible={visible} onOk={handleOk} onCancel={handleCancel}>
