@@ -56,6 +56,9 @@ export default
         },
         book: {
             modalTitle: 'Book table',
+            tableUnavailable: 'Table isn\'t available for this date',
+            alreadyBooked: 'You already booked another table in this time interval, you can\'t book two tables on one time interval',
+            bookedSuccessfully: 'You booked table successfully, have a nice day',
         },
         breadcrumbNames: {
             home: 'Home',

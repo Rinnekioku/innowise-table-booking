@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { AuthLinks, ContentLinks } from '../../core/routes';
 import { Offices } from '../offices';
 import { Header } from './components/header';
@@ -25,7 +25,6 @@ export function App(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        auth.signOut();
         auth.onAuthStateChanged((user) => {
             if (user){
                 dispatch({
@@ -39,13 +38,10 @@ export function App(): JSX.Element {
     return (
         <Router>
             <Header/>
-            <ContentsSC>
-
-                <AuthRoute/>
-
+            <ContentsSC> 
                 <Switch>
                     <Redirect exact from='/' to={AuthLinks.signIn} />
-
+                    <Route path={AuthLinks.signIn || AuthLinks.signUp} component={AuthRoute}/>
                     <PrivateRoute 
                         exact 
                         path={ContentLinks.offices}

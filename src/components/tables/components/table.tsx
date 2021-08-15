@@ -1,53 +1,31 @@
 import React from 'react';
-import { Card, Button, Modal, DatePicker, Dropdown, Space, Menu } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { useTableModal } from '../../../core/hooks/tables/useTableModal';
-import { db } from '../../../core/firebase';
+import { Card, Button } from 'antd';
+import { useTable } from '../../../core/hooks/tables/useTable';
+import { BookTableModal } from './bookTableModal';
 
 export interface TableEntity {
     id: string,
 }
 
-export function Table(props: TableEntity): JSX.Element {
-    const [t, showModal, visible, handleOk, handleCancel, enableSevenDaysOnly] = useTableModal();
+export interface TablePropsEntity {
+    table: TableEntity,
+}
 
-    db.ref('/reservation/minsk/room0minsk/table0minsk/').on('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log(data);
-    });
-
-    const menu = (): JSX.Element => {
-        return (
-            <Menu>
-                <Menu.Item key={1}>
-                    6.00-12.00
-                </Menu.Item>
-            </Menu>
-        );
-    };
-
+export function Table(props: TablePropsEntity): JSX.Element {
+    const [t, visible, setVisible, showModal] = useTable(props.table);
     return(
         <>
-            <Card title={props.id}>
+            <Card title={props.table.id}>
                 <Button onClick={showModal}>
                     {t('tables.bookTable')}
                 </Button>
             </Card>
-            <Modal title={t('book.modalTitle')} visible={visible} onOk={handleOk} onCancel={handleCancel}>
-                <Space>
-                    <DatePicker 
-                        onChange={(date, dateString) =>{
-                            console.log(date, dateString);
-                        }} 
-                        disabledDate={enableSevenDaysOnly}
-                    />
-                    <Dropdown overlay={menu} trigger={['click']}>
-                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}> 
-                            Click me <DownOutlined/>
-                        </a>
-                    </Dropdown>
-                </Space>
-            </Modal>
+
+            <BookTableModal
+                table={props.table}
+                visible={visible}
+                setVisible={setVisible}
+            />
         </>
     );
 }

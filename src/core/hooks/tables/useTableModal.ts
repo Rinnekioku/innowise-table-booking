@@ -1,23 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Moment } from 'moment';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
+import { useTimeIntervalsMenu } from './useTimeIntervalsMenu';
+import { useBookTable } from './useBookTable';
+import { TableDataContext } from '../../../components/tables/components/reducer';
+import { TableEntity } from '../../../components/tables/components/table';
 
-export function useTableModal(): [TFunction, () => void, boolean, () => void, () => void, (current: Moment) => boolean] {
-    const [visible, setVisible] = useState<boolean>(false);
+interface OkButtonProps {
+    disabled: boolean,
+}
+
+export function useTableModal(table: TableEntity): [TFunction, (current: Moment) => boolean, () => JSX.Element, () => void, OkButtonProps] {
+    const availableTimeMenu = useTimeIntervalsMenu();
+    const bookTable = useBookTable(table);
     const { t } = useTranslation();
+    const [tableState] = useContext(TableDataContext);
+    const [okButtonProps, setOkButtonProps] = useState<OkButtonProps>({disabled: true});
 
-    const showModal = () => {
-        setVisible(true);
-    };
-
-    const handleOk = () => {
-        setVisible(false);
-    };
-
-    const handleCancel = () => {
-        setVisible(false);
-    };
+    useEffect(() => {
+        if (tableState.date !== '' && tableState.timeInterval !== -1){
+            setOkButtonProps({
+                disabled: false,
+            });
+        } else {
+            setOkButtonProps({
+                disabled: true,
+            });
+        }
+    }, [tableState.date, tableState.timeInterval]);
 
     const enableSevenDaysOnly = (current: Moment): boolean => {
         const getYesterdayDay = () => {
@@ -33,5 +44,5 @@ export function useTableModal(): [TFunction, () => void, boolean, () => void, ()
         return current && current.valueOf() < getYesterdayDay().valueOf() || current.valueOf() > getWeekLaterDay().valueOf();
     };
 
-    return [t, showModal, visible, handleOk, handleCancel, enableSevenDaysOnly];
+    return [t, enableSevenDaysOnly, availableTimeMenu, bookTable, okButtonProps];
 }

@@ -8,13 +8,14 @@ import { useTables } from '../../core/hooks/tables';
 import { Loader } from '../../core/constants/loader';
 import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
+import { TableDataContext} from './components/reducer';
 
 interface TablePropsEntity{
     routes: Route[],
 }
 
 export function Tables(props: TablePropsEntity): JSX.Element {
-    const [tablesState, t, routes] = useTables(props.routes);
+    const [tablesState, t, routes, tableState, tableDispatch] = useTables(props.routes);
 
     if (tablesState.isLoading) {
         return (
@@ -48,18 +49,20 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                         title={t('tables.title')}
                         breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
                     />
-                    <Row gutter={blockMargin}>
-                        {tablesState.tables.map((room: TableEntity) => {
-                            return (
-                                <Col span={blockSpan} key={room.id}>
-                                    <Table
-                                        
-                                        id={room.id}
-                                    />
-                                </Col>
-                            );
-                        })}
-                    </Row>
+                    <TableDataContext.Provider value={[tableState, tableDispatch]}>
+                        <Row gutter={blockMargin}>
+                            {tablesState.tables.map((table: TableEntity) => {
+                                return (
+                                    <Col span={blockSpan} key={table.id}>
+                                        <Table
+                                            table={table}
+                                        />
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+                    </TableDataContext.Provider>
+
                 </>
             );
         }
