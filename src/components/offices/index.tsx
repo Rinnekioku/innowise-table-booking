@@ -1,8 +1,12 @@
 import React from 'react';
-import { Space, PageHeader } from 'antd';
+import { Row, Col, PageHeader } from 'antd';
 import { Office } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useOffices } from '../../core/hooks/offices';
+import {renderBreadcrumb} from '../../core/constants/renderBreadcrumb';
+import { Loader } from '../../core/constants/loader';
+import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { ErrorBlock } from '../../core/constants/errorBlock';
 
 export interface OfficeEntity {
     id: string,
@@ -14,38 +18,51 @@ interface OfficesPropsEntity{
 }
 
 export function Offices (props: OfficesPropsEntity): JSX.Element {
-    const [officesState, t] = useOffices();   
+    const [officesState, t] = useOffices();
 
-    if (!officesState.isLoaded) {
+    if (officesState.isLoading) {
         return (
             <>
-                <p>{t('offices.loadingOffices')}</p>
+                <PageHeader
+                    title={t('offices.title')}
+                    breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
+                />
+                <Row justify={loaderAlign}>
+                    <Loader/>
+                </Row>
             </>
         );
     } else {
         if (officesState.error) {
             return (
                 <>
-                    <p>{t('offices.noOfficesError')}</p>
+                    <PageHeader
+                        title={t('offices.title')}
+                        breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
+                    />
+                    <Row justify={errorAlign}>
+                        <ErrorBlock errorText={t('offices.noOfficesError')}/>
+                    </Row>
                 </>
             );
         } else {
             return (
                 <>
                     <PageHeader
-                        title='Offices'
-                        breadcrumb={{routes: props.routes}}
+                        title={t('offices.title')}
+                        breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <Space>
+                    <Row gutter={blockMargin}>
                         {officesState.offices.map((office: OfficeEntity) => {
                             return (
-                                <Office
-                                    key={office.id}
-                                    name={office.name}
-                                />
+                                <Col span={blockSpan} key={office.id}>
+                                    <Office
+                                        name={office.name}
+                                    />
+                                </Col>
                             );
                         })}
-                    </Space>
+                    </Row>
                 </>
             );
         }

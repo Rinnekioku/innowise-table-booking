@@ -1,54 +1,54 @@
 import { OfficeEntity } from '../../../../components/offices';
 import { OfficesReducerActions } from './actions';
+import { OfficesActionsType } from './actions';
 
 export interface OfficeStateEntity {
-    isLoaded: boolean,
+    isLoading: boolean,
     error: boolean,
     offices: OfficeEntity[],
 }
 
 const initialState: OfficeStateEntity = {
-    isLoaded: false,
+    isLoading: true,
     error: false,
     offices:[],
 };
 
-interface OfficesRemoveAddAction {
-    type: OfficesReducerActions.removeOffice | OfficesReducerActions.addOffice,
-    payload: OfficeEntity,
-}
-
-interface OfficesLoadAction {
-    type: OfficesReducerActions.loadOffices,
-    payload: OfficeEntity[],
-}
-
-export type OfficesActions = OfficesRemoveAddAction | OfficesLoadAction;
-
-export function officesReducer(state: OfficeStateEntity = initialState, action: OfficesActions): OfficeStateEntity{
+export function officesReducer(state: OfficeStateEntity = initialState, action: OfficesActionsType): OfficeStateEntity{
     switch (action.type) {
-    case 'LOAD_OFFICES':
-        if (action.payload.length === 0){
+    case OfficesReducerActions.loadOffices:
+        if (action.payload?.length){
             return {
                 ...state,
-                isLoaded: true,
-                error: true,
                 offices: [...action.payload],
             };
         } else {
             return {
                 ...state,
-                isLoaded: true,
-                error: false,
-                offices: [...action.payload],
+                offices: [],
             };
         }
-    case 'ADD_OFFICE':
+    case OfficesReducerActions.drop:
+        return {
+            ...state,
+            offices: [],
+        };
+    case OfficesReducerActions.loading:
+        return {
+            ...state,
+            isLoading: action.payload,
+        };
+    case OfficesReducerActions.error:
+        return {
+            ...state,
+            error: action.payload,
+        };
+    case OfficesReducerActions.add:
         return {
             ...state,
             offices: [...state.offices, action.payload],
         };
-    case 'REMOVE_OFFICE':
+    case OfficesReducerActions.remove:
         return {
             ...state,
             offices: [...state.offices.filter((item: OfficeEntity) => item.id !== action.payload.id)],
