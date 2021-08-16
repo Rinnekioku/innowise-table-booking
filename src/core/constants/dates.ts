@@ -1,10 +1,10 @@
-import { unavailableTimeTag } from './tableBookingTags';
+import { availableTimeTag } from './tableBookingTags';
 
 export const daysInWeek = 7;
 export const charactersToReplaceInDate = '-0';
 export const replacerCharacterInDate = '-';
 export const dividerCharacterInDate = '-';
-export const emptyReservations = new Array(4).fill(unavailableTimeTag);
+export const emptyReservations = new Array(4).fill(availableTimeTag);
 
 export function dateToString(date: Date): string{
     const year = date.getFullYear();

@@ -1,7 +1,7 @@
 import { put, takeEvery, PutEffect, ForkEffect } from '@redux-saga/core/effects';
 import { RoomsActionsType, RoomsReducerActions } from '../../reducers/rooms/actions';
 
-export function* loadRoomsSagaWorker(action: RoomsActionsType): Generator<PutEffect>{
+function* loadRoomsSagaWorker(action: RoomsActionsType): Generator<PutEffect>{
     const {payload: data} = action;
     if (Array.isArray(data) && data.length !== 0){
         yield put({
@@ -24,6 +24,6 @@ export function* loadRoomsSagaWorker(action: RoomsActionsType): Generator<PutEff
     }
 }
 
-export function* loadRoomsSaga(): Generator<ForkEffect>{
+export function* loadRoomsSaga(): Generator<ForkEffect> {
     yield takeEvery(RoomsReducerActions.sagaLoad, loadRoomsSagaWorker);
 }

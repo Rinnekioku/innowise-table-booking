@@ -1,1 +1,1 @@
-export const unavailableTimeTag = 'none';
+export const availableTimeTag = 'none';

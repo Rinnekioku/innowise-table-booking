@@ -12,9 +12,9 @@ export function useTableReservations (tableId: string): () => void {
 
     const validateTableReservations = (reservations: [string[], string[]][]) => {
         const today = new Date();
-        const todayDate = today.getUTCDate();
-        const todayMonth = today.getUTCMonth();
-        const todayYear = today.getUTCFullYear();
+        const todayDate = today.getDate();
+        const todayMonth = today.getMonth();
+        const todayYear = today.getFullYear();
 
         const validatedReservations = reservations
             .filter((item: [string[], string[]]) => {

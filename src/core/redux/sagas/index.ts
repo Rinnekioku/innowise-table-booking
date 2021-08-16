@@ -9,6 +9,8 @@ import { dropRoomsSaga } from './rooms/drop';
 import { loadTablesSaga } from './tables/load';
 import { dropTablesSaga } from './tables/drop';
 import { signInSaga } from './auth/signIn';
+import { loadReservationsSaga } from './reservations/load';
+import { dropReservationsSaga } from './reservations/drop';
 
 export const sagaMiddleware = createSagaMiddleware();
 
@@ -23,5 +25,7 @@ export function* rootSaga(): Generator<AllEffect<Generator<ForkEffect> > >{
         loadTablesSaga(),
         dropTablesSaga(),
         signInSaga(),
+        loadReservationsSaga(),
+        dropReservationsSaga(),
     ]);
 }

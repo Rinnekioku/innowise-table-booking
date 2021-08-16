@@ -60,11 +60,17 @@ export default
             alreadyBooked: 'You already booked another table in this time interval, you can\'t book two tables on one time interval',
             bookedSuccessfully: 'You booked table successfully, have a nice day',
         },
+        reservations: {
+            title: 'My reservations',
+            remove: 'Remove reservation',
+            error: 'You haven\'t booked any table yet'
+        },
         breadcrumbNames: {
             home: 'Home',
             offices: 'Offices',
             rooms: 'Rooms',
             tables: 'Tables',
+            reservations: 'Reservations',
         },
         notFound: '404. Sorry, no matches',
     }

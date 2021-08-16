@@ -18,6 +18,8 @@ import { PrivateRoute } from '../../core/constants/privateRoute';
 import { PublicRoute } from '../../core/constants/publicRoute';
 import { AuthReducerActions } from '../../core/redux/reducers/auth/actions';
 import { AuthRoute } from './components/auth';
+import { Reservations } from '../reservations';
+import { ReservationsBreadcrumb } from '../../core/routes/reservations';
 
 export function App(): JSX.Element {
     i18nextInit('en');
@@ -66,6 +68,15 @@ export function App(): JSX.Element {
                     >
                         <Tables
                             routes={TablesBreadcrumb}
+                        />
+                    </PrivateRoute>
+
+                    <PrivateRoute
+                        exact
+                        path={ContentLinks.userReservations}
+                    >
+                        <Reservations
+                            routes={ReservationsBreadcrumb}
                         />
                     </PrivateRoute>
 

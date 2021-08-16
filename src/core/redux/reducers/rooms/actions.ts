@@ -42,3 +42,4 @@ export type RoomsActionsType =
     RoomsLoadHandleAction |
     RoomsErrorHandleAction |
     RoomsDropAction;
+    

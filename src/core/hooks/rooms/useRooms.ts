@@ -21,6 +21,7 @@ export function useRooms(): [RoomsStateEntity, TFunction]{
         const office = getOfficeFromURL();
         const roomsPath = `rooms/${office}`;
         const roomsRef = db.ref(roomsPath);
+        
         roomsRef.on('value', (snapshot) => {
             const data = snapshot.val();
             dispatch({type: RoomsReducerActions.sagaLoad ,payload:data});

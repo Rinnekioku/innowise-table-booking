@@ -3,7 +3,7 @@ import { Menu ,Button } from 'antd';
 import { TableDataContextReducerActions } from '../../../components/tables/components/actions';
 import { TableDataContext } from '../../../components/tables/components/reducer';
 import { scheduleTime } from '../../constants/scheduleTime';
-import { unavailableTimeTag } from '../../constants/tableBookingTags';
+import { availableTimeTag } from '../../constants/tableBookingTags';
 import { useTranslation } from 'react-i18next';
 
 
@@ -16,7 +16,7 @@ export function useTimeIntervalsMenu(): () => JSX.Element {
         const availableTimeIntervals = tableState.schedule?.get(date)
             ?.reduce((acc: JSX.Element[], item: string, index: number): JSX.Element[] => {
                 const timeInterval = scheduleTime[index];
-                if (item === unavailableTimeTag) {
+                if (item === availableTimeTag) {
                     return [...acc,(
                         <Menu.Item key={index}>
                             <Button onClickCapture={() => {
