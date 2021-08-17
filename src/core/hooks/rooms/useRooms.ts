@@ -27,6 +27,10 @@ export function useRooms(): [RoomsStateEntity, TFunction]{
             dispatch({type: RoomsReducerActions.sagaLoad ,payload:data});
             dispatch({type: TablesReducerActions.sagaDrop});
         });
+
+        return () => {
+            roomsRef.off('value');
+        };
     }, [dispatch, getOfficeFromURL]);
 
     return [roomsState, t];

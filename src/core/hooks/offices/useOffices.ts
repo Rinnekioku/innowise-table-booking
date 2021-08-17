@@ -23,6 +23,10 @@ export function useOffices(): [OfficeStateEntity, TFunction]{
             dispatch({type: RoomsReducerActions.sagaDrop});
             dispatch({type: TablesReducerActions.sagaDrop});
         });
+
+        return () => {
+            officesRef.off('value');
+        };
     }, [dispatch]);
 
     return [officesState, t];

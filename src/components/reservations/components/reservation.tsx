@@ -1,14 +1,10 @@
 import React from 'react';
-import { Card, Row, Col, Checkbox, Button } from 'antd';
+import { Row, Col, Checkbox, Button } from 'antd';
 import { ReservationEntity } from '..';
 import { scheduleTime } from '../../../core/constants/scheduleTime';
 import { reservationBlockSize, checkboxSize, reservationGutter, buttonSize } from '../../../core/constants/reservationBlockSize';
-import { db } from '../../../core/firebase';
-import { availableTimeTag } from '../../../core/constants/tableBookingTags';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../core/redux';
-import firebase from 'firebase';
+import { ReservationCardSC } from './styled';
 
 interface ReservationPropsEntity extends ReservationEntity {
     value: string,
@@ -17,11 +13,10 @@ interface ReservationPropsEntity extends ReservationEntity {
 
 export function Reservation(props: ReservationPropsEntity): JSX.Element {
     const {office, room, table, date, timeInterval, value, removeReservation} = props;
-    const userId = useSelector((state: RootState) => state.auth.userId);
     const { t } = useTranslation();
 
     return (
-        <Card>
+        <ReservationCardSC>
             <Row gutter={reservationGutter}>
                 <Col span={checkboxSize}>
                     <Checkbox value={value}/>
@@ -49,6 +44,6 @@ export function Reservation(props: ReservationPropsEntity): JSX.Element {
                     </Button>
                 </Col>
             </Row>
-        </Card>
+        </ReservationCardSC>
     );
 }

@@ -32,6 +32,9 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
             const data = snapshot.val();
             dispatch({type: TablesReducerActions.sagaLoad ,payload: data});
         });
+        return () => {
+            tablesRef.off('value');
+        };
     }, [dispatch, location, getOfficeFromURL, getRoomIdFromURL]);
 
     useEffect(() => {

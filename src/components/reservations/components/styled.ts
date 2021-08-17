@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Card } from 'antd';
+import { Checkbox, Card } from 'antd';
+
+export const CheckboxGroupSC = styled(Checkbox.Group)`
+    flex: 100%;`;
 
 export const ReservationCardSC = styled(Card)`
-    display: flex !important;
-    flex-direction: inline !important;
-    justify-content: space-between !important;`;
+    margin: 0.5rem 0;`;
