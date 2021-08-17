@@ -9,6 +9,7 @@ import { Loader } from '../../core/constants/loader';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { useReservations } from '../../core/hooks/reservations/useReservations';
 import { CheckboxGroupSC } from './components/styled';
+import { errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 
 export interface ReservationEntity {
     office: string,
@@ -32,7 +33,9 @@ export function Reservations(props: ReservationsPropsEntity): JSX.Element {
                     title={t('reservations.title')}
                     breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                 />
-                <Loader/>
+                <Row justify={loaderAlign}>
+                    <Loader/>
+                </Row>
             </>
         );
     } else {
@@ -43,7 +46,10 @@ export function Reservations(props: ReservationsPropsEntity): JSX.Element {
                         title={t('reservations.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <ErrorBlock errorText={t('reservations.error')}/>
+
+                    <Row justify={errorAlign}>
+                        <ErrorBlock errorText={t('reservations.error')}/>
+                    </Row>
                 </>
             );
         } else {

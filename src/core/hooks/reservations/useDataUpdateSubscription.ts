@@ -31,6 +31,7 @@ export function useDataUpdateSubscription(userReservations: ReservationsStateEnt
 
         return onlyReserved;
     };
+    
     useEffect(() => {
         const userReservationsPath = `users/${userId}`;
         const userReservationsRef = db.ref(userReservationsPath);

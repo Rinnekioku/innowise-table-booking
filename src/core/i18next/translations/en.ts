@@ -61,9 +61,14 @@ export default
             bookedSuccessfully: 'You booked table successfully, have a nice day',
         },
         reservations: {
+            view: 'View my reservations',
             title: 'My reservations',
             remove: 'Remove reservation',
             error: 'You haven\'t booked any table yet'
+        },
+        upload: {
+            change: 'Change profile picture',
+            success: 'Profile picture uploaded successfully',
         },
         breadcrumbNames: {
             home: 'Home',
