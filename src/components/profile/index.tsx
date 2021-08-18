@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../core/redux';
-import { storage } from '../../core/firebase';
+import { auth, storage } from '../../core/firebase';
 import { useTranslation } from 'react-i18next';
 import { AdminModal } from './components/adminModal';
 
@@ -19,6 +19,7 @@ export function Profile(): JSX.Element {
     const { t } = useTranslation();
     const [adminModalVisible, setAdminModalVisible] = useState<boolean>(false);
     const [avatarURL, setAvatarURL] = useState<string>('');
+    const admins = process.env.REACT_APP_FIRST_ADMIN_UID;
     
     const viewReservations = () => {
         history.push(ContentLinks.userReservations);
@@ -51,7 +52,7 @@ export function Profile(): JSX.Element {
                         updateAvatarURL={updateAvatarURL}
                     />
                 </Menu.Item>
-                <Menu.Item>
+                {auth.currentUser?.uid === admins ? (<Menu.Item>
                     <Button onClick={() => {setAdminModalVisible(true);}}>
                         Create office
                     </Button>
@@ -59,7 +60,7 @@ export function Profile(): JSX.Element {
                         visible={adminModalVisible}
                         setVisible={setAdminModalVisible}
                     />
-                </Menu.Item>
+                </Menu.Item>) : null}
             </Menu>
         );
     };
