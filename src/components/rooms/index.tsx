@@ -8,13 +8,15 @@ import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { Loader } from '../../core/constants/loader';
 import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
+import { itemsOnPage } from '../../core/constants/itemsOnPage';
+import { PaginationSC } from '../../core/styles/pagination';
 
 interface RoomsPropsEntity{
     routes: Route[],
 }
 
 export function Rooms(props: RoomsPropsEntity): JSX.Element {
-    const [roomsState, t] = useRooms();   
+    const [roomsState, t, page, onPageChange, total] = useRooms();   
 
     if (roomsState.isLoading) {
         return (
@@ -59,6 +61,16 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                                 </Col>
                             );
                         })}
+                    </Row>
+                    
+                    <Row justify={'center'} align={'bottom'}>
+                        <PaginationSC
+                            current={page}
+                            defaultPageSize={itemsOnPage}
+                            showSizeChanger={false}
+                            onChange={onPageChange}
+                            total={total}
+                        />
                     </Row>
                 </>
             );

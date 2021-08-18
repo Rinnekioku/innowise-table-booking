@@ -12,8 +12,9 @@ import { TablesReducerActions } from '../../redux/reducers/tables/actions';
 import { initialTableDataContextState, TableDataContextEntity, tableDataContextReducer } from '../../../components/tables/components/reducer';
 import { TableActionType } from '../../../components/tables/components/actions';
 import { TablesStateEntity } from '../../redux/reducers/tables';
+import { usePagination } from '../pagination/usePagination';
 
-export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[], TableDataContextEntity, Dispatch<TableActionType>]{
+export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[], TableDataContextEntity, Dispatch<TableActionType>, number, (newPage: number) => void, number]{
     const tables = useSelector((state: RootState) => state.tables);
     const location = useLocation();
     const { t } = useTranslation();
@@ -22,20 +23,30 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
     const [tableState, tableDispatch] = useReducer(tableDataContextReducer, initialTableDataContextState);
     const getOfficeFromURL = useOfficeFromURL(location);
     const getRoomIdFromURL = useRoomIdFromURL(location);
+    const [page, onPageChange, total, setTotal] = usePagination();
 
     useEffect(() => {
         const office = getOfficeFromURL();
         const room = getRoomIdFromURL();
-        const tablesPath = `tables/${office}/${room}`;
+        const tablesPath = `tables/${office}/${room}/${page - 1}`;
+        const totalTablesInRoomPath = `/tables/${office}/${office}TotalTables`;
         const tablesRef = db.ref(tablesPath);
+        const totalTablesInRoomRef = db.ref(totalTablesInRoomPath);
+
         tablesRef.on('value', (snapshot) => {
             const data = snapshot.val();
             dispatch({type: TablesReducerActions.sagaLoad ,payload: data});
         });
+
+        totalTablesInRoomRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            setTotal(data);
+        });
+
         return () => {
             tablesRef.off('value');
         };
-    }, [dispatch, location, getOfficeFromURL, getRoomIdFromURL]);
+    }, [dispatch, location, getOfficeFromURL, getRoomIdFromURL, page, setTotal]);
 
     useEffect(() => {
         setRoutes(
@@ -52,5 +63,5 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
         );
     }, [routesTemplate, getOfficeFromURL, getRoomIdFromURL]);
 
-    return [tables, t, routes, tableState, tableDispatch];
+    return [tables, t, routes, tableState, tableDispatch, page, onPageChange, total];
 }

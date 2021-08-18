@@ -10,6 +10,10 @@ function* loadOfficesSagaWorker(action: OfficesActionsType): Generator<PutEffect
             payload: data
         });
         yield put({
+            type: OfficesReducerActions.error,
+            payload: false,
+        });
+        yield put({
             type: OfficesReducerActions.loading,
             payload: false,
         });

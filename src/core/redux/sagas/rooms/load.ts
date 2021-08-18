@@ -9,6 +9,10 @@ function* loadRoomsSagaWorker(action: RoomsActionsType): Generator<PutEffect>{
             payload: data,
         });
         yield put({
+            type: RoomsReducerActions.error,
+            payload: false,
+        });
+        yield put({
             type: RoomsReducerActions.loading,
             payload: false,
         });

@@ -7,6 +7,8 @@ import {renderBreadcrumb} from '../../core/constants/renderBreadcrumb';
 import { Loader } from '../../core/constants/loader';
 import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
+import { itemsOnPage } from '../../core/constants/itemsOnPage';
+import { PaginationSC } from '../../core/styles/pagination';
 
 export interface OfficeEntity {
     id: string,
@@ -18,7 +20,7 @@ interface OfficesPropsEntity{
 }
 
 export function Offices (props: OfficesPropsEntity): JSX.Element {
-    const [officesState, t] = useOffices();
+    const [officesState, t, page, onPageChange, total] = useOffices();
 
     if (officesState.isLoading) {
         return (
@@ -62,6 +64,15 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                                 </Col>
                             );
                         })}
+                    </Row>
+                    <Row justify={'center'} align={'bottom'}>
+                        <PaginationSC 
+                            current={page}
+                            defaultPageSize={itemsOnPage}
+                            showSizeChanger={false}
+                            onChange={onPageChange}
+                            total={total}
+                        />
                     </Row>
                 </>
             );

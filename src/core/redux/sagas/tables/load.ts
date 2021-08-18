@@ -9,6 +9,10 @@ function* loadTablesSagaWorker(action: TablesActionsType): Generator<PutEffect>{
             payload: data,
         });
         yield put ({
+            type: TablesReducerActions.error,
+            payload: false,
+        });
+        yield put ({
             type: TablesReducerActions.loading,
             payload: false,
         });

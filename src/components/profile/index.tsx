@@ -11,11 +11,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../core/redux';
 import { storage } from '../../core/firebase';
 import { useTranslation } from 'react-i18next';
+import { AdminModal } from './components/adminModal';
 
 export function Profile(): JSX.Element {
     const history = useHistory();
     const userId = useSelector((state: RootState) => state.auth.userId);
     const { t } = useTranslation();
+    const [adminModalVisible, setAdminModalVisible] = useState<boolean>(false);
     const [avatarURL, setAvatarURL] = useState<string>('');
     
     const viewReservations = () => {
@@ -47,6 +49,15 @@ export function Profile(): JSX.Element {
                 <Menu.Item>
                     <UpdateProfilePicture
                         updateAvatarURL={updateAvatarURL}
+                    />
+                </Menu.Item>
+                <Menu.Item>
+                    <Button onClick={() => {setAdminModalVisible(true);}}>
+                        Create office
+                    </Button>
+                    <AdminModal
+                        visible={adminModalVisible}
+                        setVisible={setAdminModalVisible}
                     />
                 </Menu.Item>
             </Menu>

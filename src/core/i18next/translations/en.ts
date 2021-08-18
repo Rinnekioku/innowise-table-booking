@@ -70,6 +70,22 @@ export default
             change: 'Change profile picture',
             success: 'Profile picture uploaded successfully',
         },
+        admin: {
+            modalTitle: 'Create office',
+            office: 'Office name',
+            roomsQuantity: 'Rooms quantity',
+            tablesQuantity: 'Tables quantity',
+            createOffice: 'Create office',
+            successMessage: 'Office created successfully',
+            noEmptyFieldsError: 'All fields are required',
+            error: {
+                emptyOffice: 'Office field can\'t be empty',
+                maxNumberOfRooms: 'Maximum quantity of rooms in office is 200',
+                negativeNumberOfRooms: 'Quantity of rooms can\'t be negative or zero',
+                maxNumberOfTables: 'Maximum quantity of tables in room is 50',
+                negativeNumberOfTables: 'Quantity of tables can\'t be negative or zero',
+            },
+        },
         breadcrumbNames: {
             home: 'Home',
             offices: 'Offices',

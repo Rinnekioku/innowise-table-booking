@@ -9,13 +9,15 @@ import { Loader } from '../../core/constants/loader';
 import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { TableDataContext} from './components/reducer';
+import { itemsOnPage } from '../../core/constants/itemsOnPage';
+import { PaginationSC } from '../../core/styles/pagination';
 
 interface TablePropsEntity{
     routes: Route[],
 }
 
 export function Tables(props: TablePropsEntity): JSX.Element {
-    const [tablesState, t, routes, tableState, tableDispatch] = useTables(props.routes);
+    const [tablesState, t, routes, tableState, tableDispatch, page, onPageChange, total] = useTables(props.routes);
 
     if (tablesState.isLoading) {
         return (
@@ -62,7 +64,15 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                             })}
                         </Row>
                     </TableDataContext.Provider>
-
+                    <Row justify={'center'} align={'bottom'}>
+                        <PaginationSC
+                            current={page}
+                            defaultPageSize={itemsOnPage}
+                            showSizeChanger={false}
+                            onChange={onPageChange}
+                            total={total}
+                        />
+                    </Row>
                 </>
             );
         }
