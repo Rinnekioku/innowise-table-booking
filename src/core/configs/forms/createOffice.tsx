@@ -33,12 +33,9 @@ export const CreateOfficeConfig = (): JSX.Element[] => [
         label={i18n.t('admin.roomsQuantity')}
         rules={[
             ({validator(_: RuleObject, value: StoreValue) {
-                const redundantRoomsErrorMessage = i18n.t('admin.error.maxNumberOfRooms');
                 const negativeRoomsErrorMessage = i18n.t('admin.error.negativeNumberOfRooms');
 
-                if (value > 200) {
-                    return Promise.reject(new Error(redundantRoomsErrorMessage));
-                } else if (value <= 0) {
+                if (value <= 0) {
                     return Promise.reject(new Error(negativeRoomsErrorMessage));
                 } else {
                     return Promise.resolve();
@@ -57,12 +54,9 @@ export const CreateOfficeConfig = (): JSX.Element[] => [
         label={i18n.t('admin.tablesQuantity')}
         rules={[
             ({validator(_: RuleObject, value: StoreValue) {
-                const redundantTablesErrorMessage = i18n.t('admin.error.maxNumberOfTables');
                 const negativeTablesErrorMessage = i18n.t('admin.error.negativeNumberOfTables');
 
-                if (value > 50) {
-                    return Promise.reject(new Error(redundantTablesErrorMessage));
-                } else if (value <= 0) {
+                if (value <= 0) {
                     return Promise.reject(new Error(negativeTablesErrorMessage));
                 } else {
                     return Promise.resolve();

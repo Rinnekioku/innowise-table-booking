@@ -121,7 +121,7 @@ export function useCreateOffice(setVisible: Dispatch<SetStateAction<boolean> >):
             }
             message.success(t('admin.successMessage'));
         } else {
-            message.error(t('admin.noEmptyFieldsError'));
+            message.error(t('admin.errors.noEmptyFields'));
         }
     };
 
