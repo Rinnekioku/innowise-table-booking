@@ -5,6 +5,7 @@ import { BookTableModal } from './bookTableModal';
 
 export interface TableEntity {
     id: string,
+    name: string
 }
 
 export interface TablePropsEntity {
@@ -15,7 +16,7 @@ export function Table(props: TablePropsEntity): JSX.Element {
     const [t, visible, setVisible, showModal] = useTable(props.table);
     return(
         <>
-            <Card title={props.table.id}>
+            <Card title={props.table.name}>
                 <Button onClick={showModal}>
                     {t('tables.bookTable')}
                 </Button>

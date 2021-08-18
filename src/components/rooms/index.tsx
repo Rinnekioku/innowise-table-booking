@@ -55,7 +55,7 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                             return (
                                 <Col span={blockSpan} key={room.id}>
                                     <Room
-                                        
+                                        name={room.name} 
                                         id={room.id}
                                     />
                                 </Col>

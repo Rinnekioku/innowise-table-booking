@@ -4,13 +4,14 @@ import { usePlaceToPlace } from '../../../core/hooks/rediricts/usePlaceToPlace';
 
 export interface RoomEntity {
     id: string,
+    name: string,
 }
 
 export function Room(props: RoomEntity): JSX.Element {
     const [goToRoom, t] = usePlaceToPlace(`${props.id}/tables`);
 
     return(
-        <Card title={props.id}>
+        <Card title={props.name}>
             <Button
                 onClick={goToRoom}
             >

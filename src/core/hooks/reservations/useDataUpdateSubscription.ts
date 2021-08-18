@@ -37,7 +37,7 @@ export function useDataUpdateSubscription(userReservations: ReservationsStateEnt
         const userReservationsRef = db.ref(userReservationsPath);
 
         userReservationsRef.on('value', (snapshot) => {
-            const data = snapshot.val();
+            const data = snapshot.val() ?? [];
             const reserved = getReserved(Object.entries(data));
             dispatch({type: ReservationsReducerActions.sagaLoad, payload: reserved}); 
         });
