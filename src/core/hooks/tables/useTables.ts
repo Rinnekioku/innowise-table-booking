@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, Dispatch } from 'react';
+import { useState, useEffect, useReducer, Dispatch, SetStateAction } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { db } from '../../firebase';
@@ -14,7 +14,7 @@ import { TableActionType } from '../../../components/tables/components/actions';
 import { TablesStateEntity } from '../../redux/reducers/tables';
 import { usePagination } from '../pagination/usePagination';
 
-export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[], TableDataContextEntity, Dispatch<TableActionType>, number, (newPage: number) => void, number]{
+export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[], TableDataContextEntity, Dispatch<TableActionType>, number, Dispatch<SetStateAction<number> >, (newPage: number) => void, number]{
     const tables = useSelector((state: RootState) => state.tables);
     const location = useLocation();
     const { t } = useTranslation();
@@ -23,7 +23,7 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
     const [tableState, tableDispatch] = useReducer(tableDataContextReducer, initialTableDataContextState);
     const getOfficeFromURL = useOfficeFromURL(location);
     const getRoomIdFromURL = useRoomIdFromURL(location);
-    const [page, onPageChange, total, setTotal] = usePagination();
+    const [page, setPage, onPageChange, total, setTotal] = usePagination();
 
     useEffect(() => {
         const office = getOfficeFromURL();
@@ -63,5 +63,5 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
         );
     }, [routesTemplate, getOfficeFromURL, getRoomIdFromURL]);
 
-    return [tables, t, routes, tableState, tableDispatch, page, onPageChange, total];
+    return [tables, t, routes, tableState, tableDispatch, page, setPage,onPageChange, total];
 }

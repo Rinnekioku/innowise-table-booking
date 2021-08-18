@@ -21,6 +21,7 @@ interface OfficesPropsEntity{
 
 export function Offices (props: OfficesPropsEntity): JSX.Element {
     const [officesState, t, page, onPageChange, total] = useOffices();
+    
 
     if (officesState.isLoading) {
         return (

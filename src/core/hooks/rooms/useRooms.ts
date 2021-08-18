@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { db } from '../../firebase';
@@ -11,13 +11,13 @@ import { RoomsReducerActions } from '../../redux/reducers/rooms/actions';
 import { TablesReducerActions } from '../../redux/reducers/tables/actions';
 import { usePagination } from '../pagination/usePagination';
 
-export function useRooms(): [RoomsStateEntity, TFunction, number, (newPage: number) => void, number]{
+export function useRooms(): [RoomsStateEntity, TFunction, number, Dispatch<SetStateAction<number> >, (newPage: number) => void, number]{
     const roomsState = useSelector((state: RootState) => state.rooms);
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const location = useLocation();
     const getOfficeFromURL = useOfficeFromURL(location);
-    const [page, onPageChange, total, setTotal] = usePagination();
+    const [page, setPage, onPageChange, total, setTotal] = usePagination();
 
     useEffect(() => {
         const office = getOfficeFromURL();
@@ -42,5 +42,5 @@ export function useRooms(): [RoomsStateEntity, TFunction, number, (newPage: numb
         };
     }, [dispatch, getOfficeFromURL, page, setTotal]);
 
-    return [roomsState, t, page, onPageChange, total];
+    return [roomsState, t, page, setPage, onPageChange, total];
 }

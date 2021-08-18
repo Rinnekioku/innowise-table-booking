@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Row, Col, PageHeader } from 'antd';
 import { Room } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
@@ -10,13 +10,28 @@ import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/cons
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
+import { SearchBar } from '../searchbar';
+import { useState } from 'react';
 
 interface RoomsPropsEntity{
     routes: Route[],
 }
 
 export function Rooms(props: RoomsPropsEntity): JSX.Element {
-    const [roomsState, t, page, onPageChange, total] = useRooms();   
+    const [roomsState, t, page, setPage, onPageChange, total] = useRooms();
+    const [searchLine, setSearchLine] = useState<string>('');
+
+    const onChange = (e: FormEvent<HTMLInputElement>) => {
+        if (e){
+            const eventTarget = e.currentTarget;
+            const value = Number(eventTarget.value);
+            if (value <= total) {
+                const pageNumber = Math.ceil(value / itemsOnPage);
+                setPage(pageNumber === 0 ? 1 : pageNumber);
+                setSearchLine(`${value}`);
+            }
+        }
+    };
 
     if (roomsState.isLoading) {
         return (
@@ -51,15 +66,34 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
                     <Row gutter={blockMargin}>
+                        <Col span={24}>
+                            <SearchBar onChange={onChange} type='rooms'/>
+                        </Col>
                         {roomsState.rooms.map((room: RoomEntity) => {
-                            return (
-                                <Col span={blockSpan} key={room.id}>
-                                    <Room
-                                        name={room.name} 
-                                        id={room.id}
-                                    />
-                                </Col>
-                            );
+                            if (searchLine !== ''){
+                                if (room.name.match(searchLine.trim())) {
+                                    return (
+                                        <Col span={blockSpan} key={room.id}>
+                                            <Room
+                                                name={room.name} 
+                                                id={room.id}
+                                            />
+                                        </Col>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            } else {
+                                return (
+                                    <Col span={blockSpan} key={room.id}>
+                                        <Room
+                                            name={room.name} 
+                                            id={room.id}
+                                        />
+                                    </Col>
+                                ); 
+                            }
+                            
                         })}
                     </Row>
                     

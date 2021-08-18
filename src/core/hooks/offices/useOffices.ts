@@ -12,7 +12,7 @@ import { usePagination } from '../pagination/usePagination';
 
 export function useOffices(): [OfficeStateEntity, TFunction, number, (newPage: number) => void, number]{
     const officesState = useSelector((state: RootState) => state.offices);
-    const [page, onPageChange, total, setTotal] = usePagination();
+    const [page, ,onPageChange, total, setTotal] = usePagination();
     const { t } = useTranslation();
     const dispatch = useDispatch();
 

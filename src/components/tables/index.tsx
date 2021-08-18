@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Row, Col, PageHeader } from 'antd';
 import { Table } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
@@ -11,13 +11,27 @@ import { ErrorBlock } from '../../core/constants/errorBlock';
 import { TableDataContext} from './components/reducer';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
+import { SearchBar } from '../searchbar';
 
 interface TablePropsEntity{
     routes: Route[],
 }
 
 export function Tables(props: TablePropsEntity): JSX.Element {
-    const [tablesState, t, routes, tableState, tableDispatch, page, onPageChange, total] = useTables(props.routes);
+    const [tablesState, t, routes, tableState, tableDispatch, page, setPage,onPageChange, total] = useTables(props.routes);
+    const [searchLine, setSearchLine] = useState<string>('');
+
+    const onChange = (e: FormEvent<HTMLInputElement>) => {
+        if (e){
+            const eventTarget = e.currentTarget;
+            const value = Number(eventTarget.value);
+            if (value <= total) {
+                const pageNumber = Math.ceil(value / itemsOnPage);
+                setPage(pageNumber === 0 ? 1 : pageNumber);
+                setSearchLine(`${value}`);
+            }
+        }
+    };
 
     if (tablesState.isLoading) {
         return (
@@ -53,14 +67,31 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                     />
                     <TableDataContext.Provider value={[tableState, tableDispatch]}>
                         <Row gutter={blockMargin}>
+                            <Col span={24}>
+                                <SearchBar onChange={onChange} type='tables'/>
+                            </Col>
                             {tablesState.tables.map((table: TableEntity) => {
-                                return (
-                                    <Col span={blockSpan} key={table.id}>
-                                        <Table
-                                            table={table}
-                                        />
-                                    </Col>
-                                );
+                                if (searchLine !== ''){
+                                    if (table.name.match(searchLine.trim())) {
+                                        return (
+                                            <Col span={blockSpan} key={table.id}>
+                                                <Table
+                                                    table={table}
+                                                />
+                                            </Col>
+                                        );
+                                    } else {
+                                        return null;
+                                    }
+                                } else {
+                                    return (
+                                        <Col span={blockSpan} key={table.id}>
+                                            <Table
+                                                table={table}
+                                            />
+                                        </Col>
+                                    ); 
+                                }
                             })}
                         </Row>
                     </TableDataContext.Provider>

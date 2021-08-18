@@ -58,7 +58,7 @@ export function useCreateOffice(setVisible: Dispatch<SetStateAction<boolean> >):
                 {length: numberOfTables},
                 (_, index: number) => ({
                     id: `table${index}${room.id}`,
-                    name: `${index}`
+                    name: `${index + 1}`
                 })
             );
             const tablesToPageWithTables = chunk(tables, itemsOnPage);
@@ -107,7 +107,7 @@ export function useCreateOffice(setVisible: Dispatch<SetStateAction<boolean> >):
                     {length: numberOfRooms},
                     (_, index: number): RoomEntity => ({
                         id:`room${index}${officeNameKey}`,
-                        name: `${index}`
+                        name: `${index + 1}`
                     })
                 );
 

@@ -43,12 +43,14 @@ export default
             viewOffice: 'View office',
         },
         rooms: {
+            searchBarPlaceholder: 'Input room number',
             title: 'Rooms',
             loadingRooms: 'Rooms are loading...',
             noRoomsError: 'Sorry we don\'t have rooms in this office yet',
             viewRoom: 'View room',
         },
         tables: {
+            searchBarPlaceholder: 'Input table number',
             title: 'Tables',
             loadingTables: 'Tables are loading...',
             noTablesError: 'Sorry, we don\'t have tables in this room yet',
