@@ -34,7 +34,8 @@ export default
                 redirictText: 'Don\'t have account yet? ',
                 linkText: 'Sign up',
                 successSignInMessage: 'Signed in successfully',
-            }
+            },
+            signOut: 'Sign out'
         },
         offices: {
             title: 'Offices',

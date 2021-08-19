@@ -34,6 +34,10 @@ export function Profile(): JSX.Element {
         });
     };
 
+    const signOut = () => {
+        auth.signOut();
+    };
+
     useEffect(() => {
         updateAvatarURL();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,12 +51,12 @@ export function Profile(): JSX.Element {
                         {t('reservations.view')}
                     </Button>
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item key={2}>
                     <UpdateProfilePicture
                         updateAvatarURL={updateAvatarURL}
                     />
                 </Menu.Item>
-                {auth.currentUser?.uid === admins ? (<Menu.Item>
+                {auth.currentUser?.uid === admins ? (<Menu.Item key={3}>
                     <Button onClick={() => {setAdminModalVisible(true);}}>
                         Create office
                     </Button>
@@ -61,6 +65,11 @@ export function Profile(): JSX.Element {
                         setVisible={setAdminModalVisible}
                     />
                 </Menu.Item>) : null}
+                <Menu.Item key={4}>
+                    <Button onClick={signOut}>
+                        {t('auth.signOut')}
+                    </Button>
+                </Menu.Item>
             </Menu>
         );
     };
