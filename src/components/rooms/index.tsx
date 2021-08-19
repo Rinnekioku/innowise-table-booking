@@ -18,20 +18,7 @@ interface RoomsPropsEntity{
 }
 
 export function Rooms(props: RoomsPropsEntity): JSX.Element {
-    const [roomsState, t, page, setPage, onPageChange, total] = useRooms();
-    const [searchLine, setSearchLine] = useState<string>('');
-
-    const onChange = (e: FormEvent<HTMLInputElement>) => {
-        if (e){
-            const eventTarget = e.currentTarget;
-            const value = Number(eventTarget.value);
-            if (value <= total) {
-                const pageNumber = Math.ceil(value / itemsOnPage);
-                setPage(pageNumber === 0 ? 1 : pageNumber);
-                setSearchLine(`${value}`);
-            }
-        }
-    };
+    const [roomsState, t, page, onPageChange, total, searchBar, onSearchBarChange] = useRooms(); 
 
     if (roomsState.isLoading) {
         return (
@@ -67,11 +54,11 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                     />
                     <Row gutter={blockMargin}>
                         <Col span={24}>
-                            <SearchBar onChange={onChange} type='rooms'/>
+                            <SearchBar onChange={onSearchBarChange} type='rooms'/>
                         </Col>
                         {roomsState.rooms.map((room: RoomEntity) => {
-                            if (searchLine !== ''){
-                                if (room.name.match(searchLine.trim())) {
+                            if (searchBar !== ''){
+                                if (room.name.match(searchBar.trim())) {
                                     return (
                                         <Col span={blockSpan} key={room.id}>
                                             <Room

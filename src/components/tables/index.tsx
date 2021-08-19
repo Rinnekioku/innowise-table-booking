@@ -18,20 +18,8 @@ interface TablePropsEntity{
 }
 
 export function Tables(props: TablePropsEntity): JSX.Element {
-    const [tablesState, t, routes, tableState, tableDispatch, page, setPage,onPageChange, total] = useTables(props.routes);
-    const [searchLine, setSearchLine] = useState<string>('');
-
-    const onChange = (e: FormEvent<HTMLInputElement>) => {
-        if (e){
-            const eventTarget = e.currentTarget;
-            const value = Number(eventTarget.value);
-            if (value <= total) {
-                const pageNumber = Math.ceil(value / itemsOnPage);
-                setPage(pageNumber === 0 ? 1 : pageNumber);
-                setSearchLine(`${value}`);
-            }
-        }
-    };
+    const [tablesState, t, routes, tableState, tableDispatch, page, onPageChange, total, searchBar, onSearchBarChange] = useTables(props.routes);
+    
 
     if (tablesState.isLoading) {
         return (
@@ -68,11 +56,11 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                     <TableDataContext.Provider value={[tableState, tableDispatch]}>
                         <Row gutter={blockMargin}>
                             <Col span={24}>
-                                <SearchBar onChange={onChange} type='tables'/>
+                                <SearchBar onChange={onSearchBarChange} type='tables'/>
                             </Col>
                             {tablesState.tables.map((table: TableEntity) => {
-                                if (searchLine !== ''){
-                                    if (table.name.match(searchLine.trim())) {
+                                if (searchBar !== ''){
+                                    if (table.name.match(searchBar.trim())) {
                                         return (
                                             <Col span={blockSpan} key={table.id}>
                                                 <Table

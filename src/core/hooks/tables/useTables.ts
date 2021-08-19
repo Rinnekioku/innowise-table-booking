@@ -13,8 +13,9 @@ import { initialTableDataContextState, TableDataContextEntity, tableDataContextR
 import { TableActionType } from '../../../components/tables/components/actions';
 import { TablesStateEntity } from '../../redux/reducers/tables';
 import { usePagination } from '../pagination/usePagination';
+import { useSearchBar } from '../search/useSearchBar';
 
-export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[], TableDataContextEntity, Dispatch<TableActionType>, number, Dispatch<SetStateAction<number> >, (newPage: number) => void, number]{
+export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunction, Route[], TableDataContextEntity, Dispatch<TableActionType>, number, (newPage: number) => void, number, string, (e: React.FormEvent<HTMLInputElement>) => void] {
     const tables = useSelector((state: RootState) => state.tables);
     const location = useLocation();
     const { t } = useTranslation();
@@ -24,6 +25,7 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
     const getOfficeFromURL = useOfficeFromURL(location);
     const getRoomIdFromURL = useRoomIdFromURL(location);
     const [page, setPage, onPageChange, total, setTotal] = usePagination();
+    const [searchBar, onSearchBarChange] = useSearchBar(total, setPage);
 
     useEffect(() => {
         const office = getOfficeFromURL();
@@ -63,5 +65,5 @@ export function useTables(routesTemplate: Route[]): [TablesStateEntity, TFunctio
         );
     }, [routesTemplate, getOfficeFromURL, getRoomIdFromURL]);
 
-    return [tables, t, routes, tableState, tableDispatch, page, setPage,onPageChange, total];
+    return [tables, t, routes, tableState, tableDispatch, page, onPageChange, total, searchBar, onSearchBarChange];
 }

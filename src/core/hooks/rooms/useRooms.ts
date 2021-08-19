@@ -10,14 +10,16 @@ import { useOfficeFromURL } from '../dataFromURL/useOfficeFromURL';
 import { RoomsReducerActions } from '../../redux/reducers/rooms/actions';
 import { TablesReducerActions } from '../../redux/reducers/tables/actions';
 import { usePagination } from '../pagination/usePagination';
+import { useSearchBar } from '../search/useSearchBar';
 
-export function useRooms(): [RoomsStateEntity, TFunction, number, Dispatch<SetStateAction<number> >, (newPage: number) => void, number]{
+export function useRooms(): [RoomsStateEntity, TFunction, number, (newPage: number) => void, number, string, (e: React.FormEvent<HTMLInputElement>) => void]{
     const roomsState = useSelector((state: RootState) => state.rooms);
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const location = useLocation();
     const getOfficeFromURL = useOfficeFromURL(location);
     const [page, setPage, onPageChange, total, setTotal] = usePagination();
+    const [searchBar, onSearchBarChange] = useSearchBar(total, setPage);
 
     useEffect(() => {
         const office = getOfficeFromURL();
@@ -42,5 +44,5 @@ export function useRooms(): [RoomsStateEntity, TFunction, number, Dispatch<SetSt
         };
     }, [dispatch, getOfficeFromURL, page, setTotal]);
 
-    return [roomsState, t, page, setPage, onPageChange, total];
+    return [roomsState, t, page, onPageChange, total, searchBar, onSearchBarChange];
 }
