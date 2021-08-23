@@ -15,12 +15,17 @@ export function dateToString(date: Date): string{
 }
 
 export function fillRestOfWeek (date: Date = new Date(), deficientlyQuantity = daysInWeek): (string | string[])[][]{
-    
-    const result = Array.from({length: deficientlyQuantity}, (_, index) => {
-        const day = new Date();
-        day.setDate(date.getDate() + (index + 1));
-        return [dateToString(day), emptyReservations];
-    });
+    const result = date.getDate() === new Date().getDate() ? 
+        Array.from({length: deficientlyQuantity}, (_, index) => {
+            const day = new Date();
+            day.setDate(date.getDate() + index);
+            return [dateToString(day), emptyReservations];
+        }) : 
+        Array.from({length: deficientlyQuantity}, (_, index) => {
+            const day = new Date();
+            day.setDate(date.getDate() + (index + 1));
+            return [dateToString(day), emptyReservations];
+        });
 
     return result;
 }

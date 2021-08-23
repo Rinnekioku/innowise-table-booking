@@ -51,9 +51,7 @@ export function BookTableModal (props: BookTableModalProps): JSX.Element {
                     disabledDate={enableSevenDaysOnly}
                 />
                 <Dropdown disabled={tableState.isDropdownDisabled} overlay={availableTimeMenu} trigger={['click']}>
-                    <a className="ant-dropdown-link" onClick={e => {
-                        e.preventDefault();
-                    }}> 
+                    <a className="ant-dropdown-link"> 
                         {tableState.timeInterval !== -1 ? `${scheduleTime[tableState.timeInterval]} ` : 'Choose time interval '}<DownOutlined/>
                     </a>
                 </Dropdown>

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import React, { useEffect, useReducer } from 'react';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { AuthLinks, ContentLinks } from '../../core/routes';
 import { Offices } from '../offices';
 import { Header } from './components/header';
@@ -17,14 +17,17 @@ import { useDispatch } from 'react-redux';
 import { PrivateRoute } from '../../core/constants/privateRoute';
 import { PublicRoute } from '../../core/constants/publicRoute';
 import { AuthReducerActions } from '../../core/redux/reducers/auth/actions';
-import { AuthRoute } from './components/auth';
 import { Reservations } from '../reservations';
 import { ReservationsBreadcrumb } from '../../core/routes/reservations';
+import { SignInConfig, SignUpConfig } from '../../core/configs';
+import { SignIn, SignUp } from '../auth';
+import { FormDataContext, formDataContextReducer, initialFromDataContextState } from './components/auth/reducer';
 
 export function App(): JSX.Element {
     i18nextInit('en');
 
     const dispatch = useDispatch();
+    const [authState, authDispatch] = useReducer(formDataContextReducer, initialFromDataContextState);
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
@@ -38,56 +41,76 @@ export function App(): JSX.Element {
     }, [dispatch]);
 
     return (
-        <Router>
-            <Header/>
-            <ContentsSC> 
-                <Switch>
-                    <Redirect exact from='/' to={AuthLinks.signIn} />
-                    <Route path={AuthLinks.signIn || AuthLinks.signUp} component={AuthRoute}/>
-                    <PrivateRoute 
-                        exact 
-                        path={ContentLinks.offices}
-                    >
-                        <Offices
-                            routes={OfficesBreadcrumbs}
-                        />
-                    </PrivateRoute>
+        <FormDataContext.Provider value={[authState, authDispatch]}>
+            <Router>
+                <Header/>
+                <ContentsSC> 
+                    <Switch>
+                        <Redirect exact from='/' to={AuthLinks.signUp} />
+                        <PublicRoute 
+                            exact 
+                            path={AuthLinks.signUp} 
+                            restricted
+                        >
+                            <SignUp
+                                config={SignUpConfig}
+                            />
+                        </PublicRoute>
 
-                    <PrivateRoute 
-                        exact
-                        path={ContentLinks.rooms}
-                    >
-                        <Rooms
-                            routes={RoomsBreadcrumb}
-                        />
-                    </PrivateRoute>
+                        <PublicRoute 
+                            exact 
+                            path={AuthLinks.signIn} 
+                            restricted
+                        >
+                            <SignIn
+                                config={SignInConfig()}
+                            />
+                        </PublicRoute>
+                        <PrivateRoute 
+                            exact 
+                            path={ContentLinks.offices}
+                        >
+                            <Offices
+                                routes={OfficesBreadcrumbs}
+                            />
+                        </PrivateRoute>
 
-                    <PrivateRoute 
-                        exact
-                        path={ContentLinks.tables}
-                    >
-                        <Tables
-                            routes={TablesBreadcrumb}
-                        />
-                    </PrivateRoute>
+                        <PrivateRoute 
+                            exact
+                            path={ContentLinks.rooms}
+                        >
+                            <Rooms
+                                routes={RoomsBreadcrumb}
+                            />
+                        </PrivateRoute>
 
-                    <PrivateRoute
-                        exact
-                        path={ContentLinks.userReservations}
-                    >
-                        <Reservations
-                            routes={ReservationsBreadcrumb}
-                        />
-                    </PrivateRoute>
+                        <PrivateRoute 
+                            exact
+                            path={ContentLinks.tables}
+                        >
+                            <Tables
+                                routes={TablesBreadcrumb}
+                            />
+                        </PrivateRoute>
 
-                    <PublicRoute 
-                        path={ContentLinks.notFound}
-                        restricted={false}
-                    >
-                        <NotFound/>
-                    </PublicRoute>
-                </Switch>
-            </ContentsSC>
-        </Router>
+                        <PrivateRoute
+                            exact
+                            path={ContentLinks.userReservations}
+                        >
+                            <Reservations
+                                routes={ReservationsBreadcrumb}
+                            />
+                        </PrivateRoute>
+
+                        <PublicRoute 
+                            path={ContentLinks.notFound}
+                            restricted={false}
+                        >
+                            <NotFound/>
+                        </PublicRoute>
+                    </Switch>
+                </ContentsSC>
+            </Router>
+        </FormDataContext.Provider>
     );
 }

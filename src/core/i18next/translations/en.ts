@@ -67,7 +67,13 @@ export default
             view: 'View my reservations',
             title: 'My reservations',
             remove: 'Remove reservation',
-            error: 'You haven\'t booked any table yet'
+            error: 'You haven\'t booked any table yet',
+            office: 'Office',
+            room: 'Room',
+            table: 'Table',
+            date: 'Date',
+            timeInterval: 'Time interval',
+            removeSelected: 'Remove selected',
         },
         upload: {
             change: 'Change profile picture',

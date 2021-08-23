@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React from 'react';
 import { Row, Col, PageHeader } from 'antd';
 import { Table } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
@@ -6,12 +6,13 @@ import { TableEntity } from './components/table';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { useTables } from '../../core/hooks/tables';
 import { Loader } from '../../core/constants/loader';
-import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blockMargin, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { TableDataContext} from './components/reducer';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
 import { SearchBar } from '../searchbar';
+import { useResponsiveGrid } from '../../core/hooks/responsive/useResponsiveGrid';
 
 interface TablePropsEntity{
     routes: Route[],
@@ -19,6 +20,7 @@ interface TablePropsEntity{
 
 export function Tables(props: TablePropsEntity): JSX.Element {
     const [tablesState, t, routes, tableState, tableDispatch, page, onPageChange, total, searchBar, onSearchBarChange] = useTables(props.routes);
+    const colSpan = useResponsiveGrid();
     
 
     if (tablesState.isLoading) {
@@ -62,7 +64,7 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                                 if (searchBar !== ''){
                                     if (table.name.match(searchBar.trim())) {
                                         return (
-                                            <Col span={blockSpan} key={table.id}>
+                                            <Col span={colSpan} key={table.id}>
                                                 <Table
                                                     table={table}
                                                 />
@@ -73,7 +75,7 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                                     }
                                 } else {
                                     return (
-                                        <Col span={blockSpan} key={table.id}>
+                                        <Col span={colSpan} key={table.id}>
                                             <Table
                                                 table={table}
                                             />

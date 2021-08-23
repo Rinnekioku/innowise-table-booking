@@ -21,8 +21,8 @@ export function UpdateProfilePicture(props: UpdateProfilePictureProps): JSX.Elem
         try {
             const successLoadMessage = t('upload.success');
             const [imgFile, metadata] = getStorageRefWithMetadata();
-
-            await imgFile.put(file as unknown as Blob | Uint8Array | ArrayBuffer, metadata);
+            type profilePicture = Blob | Uint8Array | ArrayBuffer;
+            await imgFile.put(file as unknown as profilePicture, metadata);
             setFileList([]);
 
             message.success(successLoadMessage);

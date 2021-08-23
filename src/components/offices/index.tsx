@@ -5,10 +5,11 @@ import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useOffices } from '../../core/hooks/offices';
 import {renderBreadcrumb} from '../../core/constants/renderBreadcrumb';
 import { Loader } from '../../core/constants/loader';
-import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blockMargin, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
+import { useResponsiveGrid } from '../../core/hooks/responsive/useResponsiveGrid';
 
 export interface OfficeEntity {
     id: string,
@@ -21,7 +22,7 @@ interface OfficesPropsEntity{
 
 export function Offices (props: OfficesPropsEntity): JSX.Element {
     const [officesState, t, page, onPageChange, total] = useOffices();
-    
+    const colSpan = useResponsiveGrid(); 
 
     if (officesState.isLoading) {
         return (
@@ -58,7 +59,7 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                     <Row gutter={blockMargin}>
                         {officesState.offices.map((office: OfficeEntity) => {
                             return (
-                                <Col span={blockSpan} key={office.id}>
+                                <Col span={colSpan} key={office.id}>
                                     <Office
                                         name={office.name}
                                     />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useReducer, Dispatch } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { db } from '../../firebase';

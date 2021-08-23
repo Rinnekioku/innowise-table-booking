@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { Row, Col, PageHeader } from 'antd';
 import { Room } from './components';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
@@ -6,12 +6,12 @@ import { useRooms } from '../../core/hooks/rooms';
 import { RoomEntity } from './components/room';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { Loader } from '../../core/constants/loader';
-import { blockMargin, blockSpan, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blockMargin, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
 import { SearchBar } from '../searchbar';
-import { useState } from 'react';
+import { useResponsiveGrid } from '../../core/hooks/responsive/useResponsiveGrid';
 
 interface RoomsPropsEntity{
     routes: Route[],
@@ -19,6 +19,7 @@ interface RoomsPropsEntity{
 
 export function Rooms(props: RoomsPropsEntity): JSX.Element {
     const [roomsState, t, page, onPageChange, total, searchBar, onSearchBarChange] = useRooms(); 
+    const colSpan = useResponsiveGrid(); 
 
     if (roomsState.isLoading) {
         return (
@@ -60,7 +61,7 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                             if (searchBar !== ''){
                                 if (room.name.match(searchBar.trim())) {
                                     return (
-                                        <Col span={blockSpan} key={room.id}>
+                                        <Col span={colSpan} key={room.id}>
                                             <Room
                                                 name={room.name} 
                                                 id={room.id}
@@ -72,7 +73,7 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                                 }
                             } else {
                                 return (
-                                    <Col span={blockSpan} key={room.id}>
+                                    <Col span={colSpan} key={room.id}>
                                         <Room
                                             name={room.name} 
                                             id={room.id}

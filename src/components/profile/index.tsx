@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Avatar, Dropdown, Menu, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { avatarSize } from '../../core/constants/avatarSettings';
@@ -25,14 +25,14 @@ export function Profile(): JSX.Element {
         history.push(ContentLinks.userReservations);
     };
 
-    const updateAvatarURL = () => {
+    const updateAvatarURL = useCallback(() => {
         const imagePath = `images/${userId}.png`;
         const imageRef = storage.ref(imagePath);
 
         imageRef.getDownloadURL().then((url: string) => {
             setAvatarURL(url);
         });
-    };
+    }, [userId]);
 
     const signOut = () => {
         auth.signOut();
@@ -40,8 +40,7 @@ export function Profile(): JSX.Element {
 
     useEffect(() => {
         updateAvatarURL();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [updateAvatarURL]);
 
     const avatarMenu = () => {
         return (

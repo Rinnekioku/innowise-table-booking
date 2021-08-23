@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import {Form, Input} from 'antd';
 import {FormFieldEntity} from './index';
 import { useContext } from 'react';
@@ -8,6 +8,13 @@ import { FromDataContextReducerActions } from '../../views/components/auth/actio
 
 export function PasswordConfirmField(props: FormFieldEntity): JSX.Element {
     const [store, dispatch] = useContext(FormDataContext);
+    const onChange = (event: FormEvent<HTMLInputElement>) => {
+        dispatch({
+            type: FromDataContextReducerActions.passwordConfirmChange,
+            payload: event.currentTarget.value,
+        }); 
+    };
+
     return (
         <Form.Item
             name={props.name}
@@ -18,12 +25,7 @@ export function PasswordConfirmField(props: FormFieldEntity): JSX.Element {
         >
             <Input.Password
                 placeholder={props.placeholder}
-                onChange={(e) => {
-                    dispatch({
-                        type: FromDataContextReducerActions.passwordConfirmChange,
-                        payload: e.target.value,
-                    });
-                }} 
+                onChange={onChange} 
             />
         </Form.Item>
     );

@@ -60,7 +60,7 @@ export function Reservations(props: ReservationsPropsEntity): JSX.Element {
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
                     <Row gutter={reservationsGutter}>
-                        <Col span={reservationSize}>
+                        <Col span={reservationSize} key={'reservation-header'}>
                             <Card>
                                 <Row gutter={reservationGutter} wrap>
                                     {TableHeaderConfig(onCheckAllChange, checkAll, removeSelected)}
