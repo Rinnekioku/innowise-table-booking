@@ -6,7 +6,7 @@ import { useRooms } from '../../core/hooks/rooms';
 import { RoomEntity } from './components/room';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { Loader } from '../../core/constants/loader';
-import { blockMargin, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blockMargin, blocksJustify, errorAlign, loaderAlign, paginationAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
@@ -53,7 +53,7 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                         title={t('rooms.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <Row gutter={blockMargin}>
+                    <Row gutter={blockMargin} justify={blocksJustify}>
                         <Col span={24}>
                             <SearchBar onChange={onSearchBarChange} type='rooms'/>
                         </Col>
@@ -85,7 +85,7 @@ export function Rooms(props: RoomsPropsEntity): JSX.Element {
                         })}
                     </Row>
                     
-                    <Row justify={'center'} align={'bottom'}>
+                    <Row justify={blocksJustify} align={paginationAlign}>
                         <PaginationSC
                             current={page}
                             defaultPageSize={itemsOnPage}

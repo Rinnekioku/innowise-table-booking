@@ -1,7 +1,6 @@
 import React from 'react';
-import { Row, Col, PageHeader, Card} from 'antd';
-import { Reservation } from './components/reservation';
-import { reservationGutter, reservationsGutter, reservationSize } from '../../core/constants/reservationBlockSize';
+import { Row, PageHeader, Table} from 'antd';
+import { reservationsGutter } from '../../core/constants/reservationBlockSize';
 import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { TableHeaderConfig } from '../../core/configs/reservations/tableHeader';
@@ -9,7 +8,7 @@ import { Loader } from '../../core/constants/loader';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { useReservations } from '../../core/hooks/reservations/useReservations';
 import { CheckboxGroupSC } from './components/styled';
-import { errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blocksJustify, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
 
 export interface ReservationEntity {
     office: string,
@@ -24,7 +23,28 @@ export interface ReservationsPropsEntity {
 }
 
 export function Reservations(props: ReservationsPropsEntity): JSX.Element {
-    const [t, userReservations, onChange, checkedList, onCheckAllChange, checkAll, removeSelected, removeReservation, reservationToString] = useReservations();
+    const [
+        t, 
+        userReservations,
+        onChange,
+        checkedList,
+        removeSelected, 
+        removeReservation,
+        reservationToString
+    ] = useReservations();
+
+    const formReservations = (reservations: ReservationEntity[]) => {
+        return reservations.map((item: ReservationEntity) => {
+            const value = reservationToString(item);
+            return {
+                ...item,
+                key: value,
+                checkbox: value,
+                removeReservation: value,
+                        
+            };
+        });
+    };
     
     if (userReservations.isLoading){
         return (
@@ -59,28 +79,15 @@ export function Reservations(props: ReservationsPropsEntity): JSX.Element {
                         title={t('reservations.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <Row gutter={reservationsGutter}>
-                        <Col span={reservationSize} key={'reservation-header'}>
-                            <Card>
-                                <Row gutter={reservationGutter} wrap>
-                                    {TableHeaderConfig(onCheckAllChange, checkAll, removeSelected)}
-                                </Row>
-                            </Card>
-                        </Col>
-                        
+                    <Row gutter={reservationsGutter} justify={blocksJustify}>
                         <CheckboxGroupSC value={checkedList} onChange={onChange}>
-                            {userReservations.reservations.map((item: ReservationEntity) => {
-                                const value = reservationToString(item);
-                                return (
-                                    <Col key={value} span={reservationSize}>
-                                        <Reservation
-                                            value={value}
-                                            removeReservation={removeReservation}
-                                            {...item}
-                                        />
-                                    </Col>
-                                );
-                            })}
+                            <Table 
+                                columns={TableHeaderConfig(removeSelected, removeReservation)}
+                                dataSource={formReservations(userReservations.reservations)}
+                                pagination={false}
+                                scroll={{x: 1000}}
+                                bordered
+                            />
                         </CheckboxGroupSC>
                     </Row>
                 </>

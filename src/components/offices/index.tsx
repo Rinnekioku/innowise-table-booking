@@ -5,7 +5,7 @@ import { Route } from 'antd/lib/breadcrumb/Breadcrumb';
 import { useOffices } from '../../core/hooks/offices';
 import {renderBreadcrumb} from '../../core/constants/renderBreadcrumb';
 import { Loader } from '../../core/constants/loader';
-import { blockMargin, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blockMargin, blocksJustify, errorAlign, loaderAlign, paginationAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
 import { PaginationSC } from '../../core/styles/pagination';
@@ -56,7 +56,7 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                         title={t('offices.title')}
                         breadcrumb={{routes: props.routes, itemRender: renderBreadcrumb}}
                     />
-                    <Row gutter={blockMargin}>
+                    <Row gutter={blockMargin} justify={blocksJustify}>
                         {officesState.offices.map((office: OfficeEntity) => {
                             return (
                                 <Col span={colSpan} key={office.id}>
@@ -67,7 +67,7 @@ export function Offices (props: OfficesPropsEntity): JSX.Element {
                             );
                         })}
                     </Row>
-                    <Row justify={'center'} align={'bottom'}>
+                    <Row justify={blocksJustify} align={paginationAlign}>
                         <PaginationSC 
                             current={page}
                             defaultPageSize={itemsOnPage}

@@ -1,45 +1,87 @@
 import React from 'react';
-import { Col, Checkbox, Button} from 'antd';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { buttonSize, checkboxSize, reservationBlockSize } from '../../constants/reservationBlockSize';
+import { Checkbox, Button} from 'antd';
 import i18n from 'i18next';
+import { checkAllName } from '../../constants/checkAllReservations';
+import { ColumnsType } from 'antd/lib/table';
 
-export const TableHeaderConfig: (onCheckAllChange: (e: CheckboxChangeEvent) => void, checkAll: boolean, removeSelected: () => void) => JSX.Element[] = (onCheckAllChange: (e: CheckboxChangeEvent) => void, checkAll: boolean, removeSelected: () => void) => [
-    (
-        <Col span={checkboxSize} key={1}>
-            <Checkbox onChange={onCheckAllChange} checked={checkAll}/>
-        </Col>
-    ),
-    (
-        <Col span={reservationBlockSize} key={2}>
-            {i18n.t('reservations.office')}
-        </Col>
-    ),
-    (
-        <Col span={reservationBlockSize} key={3}>
-            {i18n.t('reservations.room')}
-        </Col>
-    ),
-    (
-        <Col span={reservationBlockSize} key={4}>
-            {i18n.t('reservations.table')}
-        </Col>
-    ),
-    (
-        <Col span={reservationBlockSize} key={5}>
-            {i18n.t('reservations.date')}
-        </Col>
-    ),
-    (
-        <Col span={reservationBlockSize} key={6}>
-            {i18n.t('reservations.timeInterval')}
-        </Col>
-    ),
-    (
-        <Col span={buttonSize} key={7}>
+const getRoomOrTableNumber = (item: string): string => {
+    const namePosition = 0;
+    const numberRegExp = /(\d)/;
+    const number = item.match(numberRegExp) ?? [];
+    return `${1 + Number(number[namePosition])}`;
+};
+
+type TableHeaderColumnsType = ColumnsType<{
+    key: string;
+    checkbox: string;
+    removeReservation: string;
+    office: string;
+    room: string;
+    table: string;
+    date: string;
+    timeInterval: number;
+}> | undefined;
+
+type TableHeaderArgsType = (
+    removeSelected: () => void,
+    removeReservation: (value: string) => void
+) => TableHeaderColumnsType
+
+export const TableHeaderConfig: TableHeaderArgsType = (
+    removeSelected: () => void,
+    removeReservation: (value: string) => void
+) => [
+    {
+        title: (
+            <Checkbox value={checkAllName}/>
+        ),
+        dataIndex: 'checkbox',
+        key: 'checkbox',
+        // eslint-disable-next-line react/display-name
+        render: (value: string) => <Checkbox value={value}/>
+    },
+    {
+        title: i18n.t('reservations.office'),
+        dataIndex: 'office',
+        key: 'office',
+    },
+    {
+        title: i18n.t('reservations.room'),
+        dataIndex: 'room',
+        key: 'room',
+        render: (room: string) => getRoomOrTableNumber(room),
+    },
+    {
+        title: i18n.t('reservations.table'),
+        dataIndex: 'table',
+        key: 'table',
+        render: (table: string) => getRoomOrTableNumber(table),
+    },
+    {
+        title: i18n.t('reservations.date'),
+        dataIndex: 'date',
+        key: 'date',
+    },
+    {
+        title: i18n.t('reservations.timeInterval'),
+        dataIndex: 'timeInterval',
+        key: 'timeInterval',
+    },
+    {
+        title: (
             <Button onClick={removeSelected}>
                 {i18n.t('reservations.removeSelected')}
             </Button>
-        </Col>
-    ),
+        ),
+        dataIndex: 'removeReservation',
+        key: 'removeReservation',
+        // eslint-disable-next-line react/display-name
+        render: (value: string) => (
+            <Button onClick={() => {
+                removeReservation(value);
+            }}>
+                {i18n.t('reservations.remove')}
+            </Button>
+        )
+    }
 ];

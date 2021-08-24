@@ -15,3 +15,5 @@ export enum blockSpans {
 
 export const loaderAlign = 'center';
 export const errorAlign = 'center';
+export const blocksJustify = 'center';
+export const paginationAlign = 'bottom';

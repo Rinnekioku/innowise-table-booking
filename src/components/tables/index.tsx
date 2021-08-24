@@ -6,7 +6,7 @@ import { TableEntity } from './components/table';
 import { renderBreadcrumb } from '../../core/constants/renderBreadcrumb';
 import { useTables } from '../../core/hooks/tables';
 import { Loader } from '../../core/constants/loader';
-import { blockMargin, errorAlign, loaderAlign } from '../../core/constants/gridSettings';
+import { blockMargin, blocksJustify, errorAlign, loaderAlign, paginationAlign } from '../../core/constants/gridSettings';
 import { ErrorBlock } from '../../core/constants/errorBlock';
 import { TableDataContext} from './components/reducer';
 import { itemsOnPage } from '../../core/constants/itemsOnPage';
@@ -56,7 +56,7 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                         breadcrumb={{routes: routes, itemRender: renderBreadcrumb}}
                     />
                     <TableDataContext.Provider value={[tableState, tableDispatch]}>
-                        <Row gutter={blockMargin}>
+                        <Row gutter={blockMargin} justify={blocksJustify}>
                             <Col span={24}>
                                 <SearchBar onChange={onSearchBarChange} type='tables'/>
                             </Col>
@@ -85,7 +85,7 @@ export function Tables(props: TablePropsEntity): JSX.Element {
                             })}
                         </Row>
                     </TableDataContext.Provider>
-                    <Row justify={'center'} align={'bottom'}>
+                    <Row justify={blocksJustify} align={paginationAlign}>
                         <PaginationSC
                             current={page}
                             defaultPageSize={itemsOnPage}

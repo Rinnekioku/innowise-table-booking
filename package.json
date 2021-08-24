@@ -55,7 +55,7 @@
     "build": "craco build",
     "test": "jest",
     "eject": "craco eject",
-    "lint": "npx eslint --fix ./src/*"
+    "lint": "eslint --fix ./src/*"
   },
   "eslintConfig": {
     "extends": [

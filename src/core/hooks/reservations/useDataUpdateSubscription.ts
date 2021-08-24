@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ReservationEntity } from '../../../components/reservations';
+import { checkAllName } from '../../constants/checkAllReservations';
 import { reservationToString } from '../../constants/reservationToString';
 import { db } from '../../firebase';
 import { ReservationsStateEntity } from '../../redux/reducers/reservations';
@@ -48,9 +49,9 @@ export function useDataUpdateSubscription(userReservations: ReservationsStateEnt
     }, [dispatch, userId]);
 
     useEffect(() => {
-        const plainOptions = userReservations.reservations.map((item: ReservationEntity) => {
+        const plainOptions = [...userReservations.reservations.map((item: ReservationEntity) => {
             return reservationToString(item);
-        });
+        }), checkAllName];
     
         setPlainOptions(plainOptions);
     }, [userReservations.reservations, setPlainOptions]);

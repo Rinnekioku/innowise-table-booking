@@ -3,7 +3,6 @@ import { TFunction, useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { ReservationEntity } from '../../../components/reservations';
 import { RootState } from '../../redux';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { ReservationsStateEntity } from '../../redux/reducers/reservations';
 import { reservationToString } from '../../constants/reservationToString';
 import { useCheckboxGroup } from './useCheckboxGroup';
@@ -11,10 +10,10 @@ import { useRemoveReservation } from './useRemoveReservation';
 import { useDataUpdateSubscription } from './useDataUpdateSubscription';
 
 
-export function useReservations(): [TFunction, ReservationsStateEntity, (list: CheckboxValueType[]) => void, CheckboxValueType[], (e: CheckboxChangeEvent) => void, boolean, () => void, (value: string) => Promise<unknown>, (item: ReservationEntity) => string] {
+export function useReservations(): [TFunction, ReservationsStateEntity, (list: CheckboxValueType[]) => void, CheckboxValueType[], () => void, (value: string) => Promise<void>, (item: ReservationEntity) => string] {
     const userId = useSelector((state: RootState) => state.auth.userId);
     const userReservations = useSelector((state: RootState) => state.reservations);
-    const [checkedList, checkAll, setPlainOptions, onChange, onCheckAllChange] = useCheckboxGroup(userReservations);
+    const [checkedList, setPlainOptions, onChange] = useCheckboxGroup(userReservations);
     const removeReservation = useRemoveReservation(userId);
     const { t } = useTranslation();
 
@@ -26,5 +25,5 @@ export function useReservations(): [TFunction, ReservationsStateEntity, (list: C
         });
     };
     
-    return [t, userReservations, onChange, checkedList, onCheckAllChange, checkAll, removeSelected, removeReservation, reservationToString];
+    return [t, userReservations, onChange, checkedList, removeSelected, removeReservation, reservationToString];
 }

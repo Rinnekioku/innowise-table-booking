@@ -3,7 +3,7 @@ import { Avatar, Dropdown, Menu, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { avatarSize } from '../../core/constants/avatarSettings';
 import { useHistory } from 'react-router-dom';
-import { ContentLinks } from '../../core/routes';
+import { AuthLinks, ContentLinks } from '../../core/routes';
 import { UpdateProfilePicture } from './components/updateProfilePicture';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -36,6 +36,7 @@ export function Profile(): JSX.Element {
 
     const signOut = () => {
         auth.signOut();
+        history.push(AuthLinks.signIn);
     };
 
     useEffect(() => {

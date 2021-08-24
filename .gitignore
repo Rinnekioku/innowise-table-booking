@@ -5,6 +5,7 @@
 # dependencies
 /node_modules
 /.pnp
+/.netlify
 .pnp.js
 .vscode
 .env
