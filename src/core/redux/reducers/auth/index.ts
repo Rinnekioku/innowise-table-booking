@@ -1,38 +1,27 @@
-import { AuthReducerActions } from './actions';
+import { auth } from '../../../firebase';
+import { AuthActionType, AuthReducerActions } from './actions';
 
 export interface AuthStateEntity {
-    email: string,
-    password: string,
-    passwordConfirm: string,
-}
-
-export interface AuthActionEntity {
-    type: AuthReducerActions,
-    payload: string, 
+    isLoggedIn: boolean,
+    userId: string,
 }
 
 const initialState: AuthStateEntity = {
-    email: '',
-    password: '',
-    passwordConfirm: '',
+    isLoggedIn: auth.currentUser !== null ? true : false,
+    userId: auth.currentUser !== null ? auth.currentUser.uid : ''
 };
 
-export function authReducer(state: AuthStateEntity = initialState, action: AuthActionEntity): AuthStateEntity {
+export function authReducer(state: AuthStateEntity = initialState, action: AuthActionType): AuthStateEntity {
     switch (action.type) {
-    case AuthReducerActions.emailChange:
+    case AuthReducerActions.setUser:
         return ({
             ...state,
-            email: action.payload
+            userId: action.payload,
         });
-    case AuthReducerActions.passwordChange:
+    case AuthReducerActions.setUserStatus:
         return ({
             ...state,
-            password: action.payload,
-        });
-    case AuthReducerActions.passwordConfirmChange:
-        return ({
-            ...state,
-            passwordConfirm: action.payload,
+            isLoggedIn: action.payload,
         });
     default:
         return state;

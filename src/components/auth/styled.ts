@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Form} from 'antd';
+import { Form } from 'antd';
 
 enum FromColors {
     shadowColor = 'rgba(0, 0, 0, 0.3)'
